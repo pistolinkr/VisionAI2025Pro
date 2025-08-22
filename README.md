@@ -2,6 +2,10 @@
 
 A ProRL V2-based image category auto-recommendation system that provides a Pinterest-style web interface and REST API.
 
+## 🌍 **Language / 언어 선택**
+
+**[🇺🇸 English](#-key-features)** | **[🇰🇷 한국어](#-한국어-korean)** | **[🇨🇳 中文](#-中文-chinese)** | **[🇯🇵 日本語](#-日本語-japanese)** | **[🇪🇸 Español](#-español-spanish)** | **[🇫🇷 Français](#-français-french)** | **[🇷🇺 Русский](#-русский-russian)** | **[🇧🇷 Português](#-português-portuguese)**
+
 ## ✨ Key Features
 
 - **AI Image Classification**: Accurate image category classification using ProRL V2 model
@@ -418,7 +422,7 @@ Start your new image analysis experience with the **VisionAI Pro Image Classific
 
 ---
 
-## 🌍 다국어 지원 / Multilingual Support / 多语言支持 / 多言語サポート / Soporte Multilingüe / Support Multilingue / Многоязычная поддержка / Suporte Multilíngue
+## 🌍 **Multilingual Support**
 
 ### 🇰🇷 한국어 (Korean)
 
