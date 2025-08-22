@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ProRL V2 Image Classification System Execution Script
+VisionAI Pro Image Classification System Execution Script
 """
 
 import os
@@ -28,7 +28,7 @@ def setup_logging():
 
 def main():
     """Main execution function"""
-    print("🚀 Starting ProRL V2 Image Classification System...")
+    print("🚀 Starting VisionAI Pro Image Classification System...")
     
     # Setup logging
     setup_logging()

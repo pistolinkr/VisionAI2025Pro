@@ -63,7 +63,7 @@ async def startup_event():
     # Initialize API key manager
     api_key_manager = APIKeyManager(secret_key=secret_key)
     
-    logger.info("ProRL V2 Image Classification API started")
+    logger.info("VisionAI Pro Image Classification API started")
 
 def verify_api_key(api_key: str = Header(..., alias="X-API-Key")) -> dict:
     """API key validation dependency"""
@@ -92,7 +92,7 @@ async def root():
     <!DOCTYPE html>
     <html>
     <head>
-        <title>ProRL V2 Image Classification API</title>
+        <title>VisionAI Pro Image Classification API</title>
         <style>
             body { font-family: Arial, sans-serif; margin: 40px; }
             .container { max-width: 800px; margin: 0 auto; }
@@ -102,7 +102,7 @@ async def root():
     </head>
     <body>
         <div class="container">
-            <h1>🚀 ProRL V2 Image Classification API</h1>
+            <h1>🚀 VisionAI Pro Image Classification API</h1>
             <p>ProRL V2 based image category auto-recommendation system</p>
             
             <h2>📚 API Endpoints</h2>

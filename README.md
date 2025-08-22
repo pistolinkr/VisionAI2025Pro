@@ -1,4 +1,4 @@
-# 🔍 ProRL V2 Image Classification System
+# 🔍 VisionAI Pro - Image Classification System
 
 A ProRL V2-based image category auto-recommendation system that provides a Pinterest-style web interface and REST API.
 

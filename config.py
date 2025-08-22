@@ -1,5 +1,5 @@
 """
-ProRL V2 Image Classification System Configuration
+VisionAI Pro Image Classification System Configuration
 """
 
 import os

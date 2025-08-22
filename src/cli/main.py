@@ -105,7 +105,7 @@ def manage_api_keys(manager: APIKeyManager, action: str, **kwargs):
 def main():
     """Main function"""
     parser = argparse.ArgumentParser(
-        description="ProRL V2 Image Classification CLI Tool",
+        description="VisionAI Pro Image Classification CLI Tool",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Usage Examples:

@@ -27,7 +27,7 @@ def create_test_image():
     return temp_file.name
 
 def test_classifier():
-    """Classifier test"""
+    """VisionAI Pro classifier test"""
     print("🧪 Starting classifier test...")
     
     try:
