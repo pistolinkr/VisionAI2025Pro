@@ -604,7 +604,7 @@ python run.py
 
 ---
 
-### 🇧🇷 Português (Portuguese)
+### 🇵🇹 Português (Portuguese)
 
 **VisionAI Pro** é um sistema de recomendação automática de categorias de imagens baseado no ProRL V2 que fornece uma interface web estilo Pinterest e uma API REST.
 
