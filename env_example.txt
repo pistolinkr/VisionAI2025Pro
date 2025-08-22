@@ -1,0 +1,17 @@
+# API Configuration
+API_SECRET_KEY=your-secret-key-here
+API_KEY_EXPIRY_DAYS=365
+
+# Database Configuration (Optional)
+DATABASE_URL=sqlite:///./image_categories.db
+
+# Model Configuration
+MODEL_PATH=./models/prorl_v2_model
+DEVICE=cuda  # or cpu
+
+# Image Storage Configuration
+UPLOAD_DIR=./uploads
+MAX_FILE_SIZE=10485760  # 10MB
+
+# Logging Configuration
+LOG_LEVEL=INFO
