@@ -4,7 +4,7 @@ A ProRL V2-based image category auto-recommendation system that provides a Pinte
 
 ## 🌍 **Language / 언어 선택**
 
-**[🇺🇸 English](#-key-features)** | **[🇰🇷 한국어](#-한국어-korean)** | **[🇨🇳 中文](#-中文-chinese)** | **[🇯🇵 日本語](#-日本語-japanese)** | **[🇪🇸 Español](#-español-spanish)** | **[🇫🇷 Français](#-français-french)** | **[🇷🇺 Русский](#-русский-russian)** | **[🇧🇷 Português](#-português-portuguese)**
+**[🇺🇸 English](#-key-features)** | **[🇰🇷 한국어](#-한국어-korean)** | **[🇨🇳 中文](#-中文-chinese)** | **[🇯🇵 日本語](#-日本語-japanese)** | **[🇪🇸 Español](#-español-spanish)** | **[🇫🇷 Français](#-français-french)** | **[🇷🇺 Русский](#-русский-russian)** | **[🇵🇹 Português](#-português-portuguese)**
 
 ## ✨ Key Features
 
