@@ -25,6 +25,10 @@ This system now supports **Firebase Firestore** as a backend database, providing
 | **History** | None | Complete |
 | **Setup** | Simple | Requires Firebase project |
 
+## 🌍 **Language / 언어 선택**
+
+**[🇺🇸 English](#-key-features)** | **[🇰🇷 한국어](#-한국어-korean)** | **[🇨🇳 中文](#-中文-chinese)** | **[🇯🇵 日本語](#-日本語-japanese)** | **[🇪🇸 Español](#-español-spanish)** | **[🇫🇷 Français](#-français-french)** | **[🇷🇺 Русский](#-русский-russian)** | **[🇵🇹 Português](#-português-portuguese)**
+
 ## ✨ Key Features
 
 - **AI Image Classification**: Accurate image category classification using ProRL V2 model
@@ -828,7 +832,7 @@ Start your new image analysis experience with the **VisionAI Pro Image Classific
 
 ---
 
-## 🌍 다국어 지원 / Multilingual Support / 多语言支持 / 多言語サポート / Soporte Multilingüe / Support Multilingue / Многоязычная поддержка / Suporte Multilíngue
+## 🌍 **Multilingual Support**
 
 ### 🇰🇷 한국어 (Korean)
 
@@ -1010,7 +1014,7 @@ python run.py
 
 ---
 
-### 🇧🇷 Português (Portuguese)
+### 🇵🇹 Português (Portuguese)
 
 **VisionAI Pro** é um sistema de recomendação automática de categorias de imagens baseado no ProRL V2 que fornece uma interface web estilo Pinterest e uma API REST.
 
