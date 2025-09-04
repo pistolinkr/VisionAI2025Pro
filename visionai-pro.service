@@ -1,0 +1,26 @@
+[Unit]
+Description=VisionAI Pro Image Classification Server
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=jetson
+Group=jetson
+WorkingDirectory=/home/jetson/visionai-pro
+Environment=PATH=/home/jetson/visionai-pro/venv/bin
+Environment=CUDA_VISIBLE_DEVICES=0
+Environment=TF_FORCE_GPU_ALLOW_GROWTH=true
+Environment=DEVICE=cuda
+Environment=HOST=0.0.0.0
+Environment=PORT=8000
+Environment=ENVIRONMENT=production
+ExecStart=/home/jetson/visionai-pro/venv/bin/python3 /home/jetson/visionai-pro/run_jetson.py
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

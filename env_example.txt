@@ -5,6 +5,11 @@ API_KEY_EXPIRY_DAYS=365
 # Database Configuration (Optional)
 DATABASE_URL=sqlite:///./image_categories.db
 
+# Firebase Configuration
+FIREBASE_SERVICE_ACCOUNT_PATH=./firebase-service-account.json
+# Or use default credentials for Google Cloud deployment
+# GOOGLE_APPLICATION_CREDENTIALS=./firebase-service-account.json
+
 # Model Configuration
 MODEL_PATH=./models/prorl_v2_model
 DEVICE=cuda  # or cpu
@@ -15,3 +20,6 @@ MAX_FILE_SIZE=10485760  # 10MB
 
 # Logging Configuration
 LOG_LEVEL=INFO
+
+# Environment
+ENVIRONMENT=development  # development, production, testing

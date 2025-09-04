@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionAI Pro Zero-Shot - 커스텀 카테고리 학습</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #333;
+            margin: 0;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            color: #666;
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+        }
+        .model-info {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .model-info h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        .model-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+            margin: 10px;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+        }
+        .tab:hover {
+            background: #f8f9ff;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 50px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9ff;
+        }
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+            transform: translateY(-2px);
+        }
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #e8ebff;
+            transform: scale(1.02);
+        }
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn.secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+        }
+        .btn.success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        .btn.danger {
+            background: linear-gradient(45deg, #dc3545, #e74c3c);
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 25px;
+        }
+        .control-group label {
+            font-weight: 500;
+            color: #333;
+        }
+        .control-group input, .control-group select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background: white;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        .result-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .result-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1.4em;
+        }
+        .success-icon {
+            color: #28a745;
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .category-item:hover {
+            transform: translateX(5px);
+        }
+        .category-info {
+            flex: 1;
+        }
+        .category-name {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+        .category-confidence {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .progress-container {
+            width: 200px;
+            margin-left: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.8s ease;
+            border-radius: 15px;
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #dc3545;
+        }
+        .api-key-section {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+        .api-key-section h4 {
+            margin: 0 0 10px 0;
+            color: #0056b3;
+        }
+        .api-key-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+        .category-management {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .category-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .category-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .category-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background: white;
+        }
+        .category-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .category-list-item:last-child {
+            border-bottom: none;
+        }
+        .search-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .search-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .search-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .search-results {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 VisionAI Pro Zero-Shot</h1>
+            <p>커스텀 카테고리 학습 시스템 - base_words.txt 기반</p>
+        </div>
+
+        <div class="model-info">
+            <h3>🚀 Zero-shot Learning 시스템</h3>
+            <div class="model-stats">
+                <div class="stat">
+                    <span class="stat-value">CLIP</span>
+                    <span class="stat-label">모델</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">1000+</span>
+                    <span class="stat-label">카테고리</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">Zero-shot</span>
+                    <span class="stat-label">학습 방식</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">실시간</span>
+                    <span class="stat-label">카테고리 추가</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="api-key-section">
+            <h4>🔑 API 키 설정</h4>
+            <input type="text" id="apiKeyInput" class="api-key-input" 
+                   placeholder="API 키를 입력하세요 (예: qz-U2PdzQxYLnGRzSHvBV8eWrk1BnjPe2IKZzkxgKGk)" 
+                   value="qz-U2PdzQxYLnGRzSHvBV8eWrk1BnjPe2IKZzkxgKGk">
+            <button class="btn" onclick="testConnection()">연결 테스트</button>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('classify')">이미지 분류</div>
+            <div class="tab" onclick="switchTab('categories')">카테고리 관리</div>
+            <div class="tab" onclick="switchTab('search')">카테고리 검색</div>
+        </div>
+
+        <!-- 이미지 분류 탭 -->
+        <div id="classify" class="tab-content active">
+            <div class="upload-area" id="uploadArea">
+                <h3>📁 이미지 업로드</h3>
+                <p>이미지를 드래그하거나 클릭하여 선택하세요</p>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                <button class="btn" onclick="document.getElementById('imageInput').click()">이미지 선택</button>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="topKInput">결과 수:</label>
+                    <input type="number" id="topKInput" value="5" min="1" max="10">
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn" id="classifyBtn" onclick="classifyImage()" disabled>Zero-shot 분류 시작</button>
+                <button class="btn secondary" onclick="clearResult()">결과 지우기</button>
+            </div>
+
+            <div id="result" class="result" style="display: none;">
+                <div class="result-header">
+                    <span class="success-icon">✅</span>
+                    <h3>Zero-shot 분류 결과</h3>
+                </div>
+                <div id="resultContent"></div>
+            </div>
+        </div>
+
+        <!-- 카테고리 관리 탭 -->
+        <div id="categories" class="tab-content">
+            <div class="category-management">
+                <h3>🔧 카테고리 관리</h3>
+                
+                <div class="category-form">
+                    <input type="text" id="newCategoryInput" placeholder="새로운 카테고리 이름">
+                    <input type="text" id="categoryDescriptionInput" placeholder="카테고리 설명 (선택사항)">
+                    <button class="btn success" onclick="addCategory()">카테고리 추가</button>
+                </div>
+
+                <div class="category-form">
+                    <input type="text" id="removeCategoryInput" placeholder="제거할 카테고리 이름">
+                    <button class="btn danger" onclick="removeCategory()">카테고리 제거</button>
+                </div>
+
+                <h4>현재 카테고리 목록 (최대 50개 표시)</h4>
+                <div id="categoryList" class="category-list">
+                    <div style="text-align: center; color: #666;">카테고리를 로드하는 중...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 카테고리 검색 탭 -->
+        <div id="search" class="tab-content">
+            <div class="search-section">
+                <h3>🔍 카테고리 검색</h3>
+                
+                <div class="search-form">
+                    <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
+                    <button class="btn" onclick="searchCategories()">검색</button>
+                </div>
+
+                <div id="searchResults" class="search-results">
+                    <div style="text-align: center; color: #666;">검색 결과가 여기에 표시됩니다</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 설정
+        const API_BASE_URL = "http://localhost:8002";
+        let selectedFile = null;
+
+        // API 키 가져오기
+        function getApiKey() {
+            return document.getElementById('apiKeyInput').value.trim();
+        }
+
+        // 탭 전환
+        function switchTab(tabName) {
+            // 모든 탭 비활성화
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // 선택된 탭 활성화
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            
+            // 카테고리 탭이 활성화되면 카테고리 목록 로드
+            if (tabName === 'categories') {
+                loadCategories();
+            }
+        }
+
+        // 연결 테스트
+        async function testConnection() {
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                alert('API 키를 입력해주세요');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const data = await response.json();
+                
+                if (data.status === 'healthy') {
+                    alert('✅ Zero-shot 서버 연결 성공!\n\n모델 정보:\n' + 
+                          `- 타입: ${data.model_info.model_type}\n` +
+                          `- 카테고리 수: ${data.model_info.categories_count}\n` +
+                          `- 모델: ${data.model_info.model_name}\n` +
+                          `- 파일: ${data.model_info.base_words_file}`);
+                } else {
+                    alert('❌ 서버 연결 실패');
+                }
+            } catch (error) {
+                alert('❌ 서버 연결 실패: ' + error.message);
+            }
+        }
+
+        // 파일 선택 처리
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            selectedFile = e.target.files[0];
+            if (selectedFile) {
+                document.getElementById('classifyBtn').disabled = false;
+                showPreview(selectedFile);
+            }
+        });
+
+        // 드래그 앤 드롭 처리
+        const uploadArea = document.getElementById('uploadArea');
+        
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            selectedFile = e.dataTransfer.files[0];
+            if (selectedFile && selectedFile.type.startsWith('image/')) {
+                document.getElementById('classifyBtn').disabled = false;
+                showPreview(selectedFile);
+            }
+        });
+
+        // 이미지 미리보기
+        function showPreview(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadArea.innerHTML = `
+                    <h3>📁 선택된 이미지</h3>
+                    <img src="${e.target.result}" style="max-width: 300px; max-height: 300px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <p><strong>파일명:</strong> ${file.name}</p>
+                    <p><strong>크기:</strong> ${(file.size / 1024).toFixed(1)} KB</p>
+                    <button class="btn" onclick="document.getElementById('imageInput').click()">다른 이미지 선택</button>
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Zero-shot 이미지 분류
+        async function classifyImage() {
+            if (!selectedFile) {
+                alert('이미지를 선택해주세요');
+                return;
+            }
+
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                alert('API 키를 입력해주세요');
+                return;
+            }
+
+            const classifyBtn = document.getElementById('classifyBtn');
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+
+            // 버튼 비활성화
+            classifyBtn.disabled = true;
+            classifyBtn.textContent = '분류 중...';
+
+            // 결과 영역 표시
+            resultDiv.style.display = 'block';
+            resultContent.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Zero-shot Learning으로 이미지를 분석하고 있습니다...</p>
+                </div>
+            `;
+
+            try {
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+                formData.append('top_k', document.getElementById('topKInput').value);
+                formData.append('api_key', apiKey);
+
+                const response = await fetch(`${API_BASE_URL}/api/classify`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayResult(result);
+                } else {
+                    throw new Error(result.detail || '분류 실패');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                resultContent.innerHTML = `
+                    <div class="error">
+                        <h4>❌ 오류 발생</h4>
+                        <p>${error.message}</p>
+                        <p>서버가 실행 중인지 확인해주세요. (포트 8002)</p>
+                    </div>
+                `;
+            } finally {
+                // 버튼 활성화
+                classifyBtn.disabled = false;
+                classifyBtn.textContent = 'Zero-shot 분류 시작';
+            }
+        }
+
+        // 결과 표시
+        function displayResult(result) {
+            const resultContent = document.getElementById('resultContent');
+            
+            let html = `
+                <div style="margin-bottom: 20px; padding: 15px; background: #e8f5e8; border-radius: 10px;">
+                    <h4>✅ Zero-shot 분류 완료</h4>
+                    <p><strong>이미지:</strong> ${result.image_name}</p>
+                    <p><strong>처리 시간:</strong> ${result.processing_time}초</p>
+                    <p><strong>모델:</strong> ${result.model_info.model_name}</p>
+                    <p><strong>카테고리 수:</strong> ${result.model_info.categories_count}</p>
+                </div>
+                <h4>🏆 Zero-shot 예측 결과</h4>
+            `;
+
+            result.predictions.forEach((pred, index) => {
+                const percentage = (pred.confidence * 100).toFixed(1);
+                const isTopResult = index === 0;
+                
+                html += `
+                    <div class="category-item" style="${isTopResult ? 'border: 2px solid #667eea;' : ''}">
+                        <div class="category-info">
+                            <div class="category-name">${index + 1}. ${pred.category}</div>
+                            <div class="category-confidence">신뢰도: ${pred.confidence.toFixed(4)}</div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${percentage}%"></div>
+                                <div class="progress-text">${percentage}%</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultContent.innerHTML = html;
+        }
+
+        // 결과 지우기
+        function clearResult() {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('imageInput').value = '';
+            selectedFile = null;
+            document.getElementById('classifyBtn').disabled = true;
+            uploadArea.innerHTML = `
+                <h3>📁 이미지 업로드</h3>
+                <p>이미지를 드래그하거나 클릭하여 선택하세요</p>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                <button class="btn" onclick="document.getElementById('imageInput').click()">이미지 선택</button>
+            `;
+        }
+
+        // 카테고리 추가
+        async function addCategory() {
+            const category = document.getElementById('newCategoryInput').value.trim();
+            const description = document.getElementById('categoryDescriptionInput').value.trim();
+            
+            if (!category) {
+                alert('카테고리 이름을 입력해주세요');
+                return;
+            }
+
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                alert('API 키를 입력해주세요');
+                return;
+            }
+
+            try {
+                const formData = new FormData();
+                formData.append('category', category);
+                formData.append('description', description);
+                formData.append('api_key', apiKey);
+
+                const response = await fetch(`${API_BASE_URL}/api/categories/add`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`✅ 카테고리 추가 성공!\n\n${result.message}`);
+                    document.getElementById('newCategoryInput').value = '';
+                    document.getElementById('categoryDescriptionInput').value = '';
+                    loadCategories();
+                } else {
+                    const error = await response.json();
+                    alert(`❌ 카테고리 추가 실패: ${error.detail}`);
+                }
+            } catch (error) {
+                alert('❌ 오류 발생: ' + error.message);
+            }
+        }
+
+        // 카테고리 제거
+        async function removeCategory() {
+            const category = document.getElementById('removeCategoryInput').value.trim();
+            
+            if (!category) {
+                alert('제거할 카테고리 이름을 입력해주세요');
+                return;
+            }
+
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                alert('API 키를 입력해주세요');
+                return;
+            }
+
+            if (!confirm(`정말로 카테고리 '${category}'를 제거하시겠습니까?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/categories/remove?category=${encodeURIComponent(category)}&api_key=${apiKey}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`✅ 카테고리 제거 성공!\n\n${result.message}`);
+                    document.getElementById('removeCategoryInput').value = '';
+                    loadCategories();
+                } else {
+                    const error = await response.json();
+                    alert(`❌ 카테고리 제거 실패: ${error.detail}`);
+                }
+            } catch (error) {
+                alert('❌ 오류 발생: ' + error.message);
+            }
+        }
+
+        // 카테고리 목록 로드
+        async function loadCategories() {
+            const apiKey = getApiKey();
+            const categoryList = document.getElementById('categoryList');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/categories?limit=50&api_key=${apiKey}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    let html = '';
+                    data.categories.forEach((category, index) => {
+                        html += `
+                            <div class="category-list-item">
+                                <span>${index + 1}. ${category}</span>
+                            </div>
+                        `;
+                    });
+                    categoryList.innerHTML = html;
+                } else {
+                    categoryList.innerHTML = '<div style="text-align: center; color: #dc3545;">카테고리 로드 실패</div>';
+                }
+            } catch (error) {
+                categoryList.innerHTML = '<div style="text-align: center; color: #dc3545;">카테고리 로드 중 오류 발생</div>';
+            }
+        }
+
+        // 카테고리 검색
+        async function searchCategories() {
+            const query = document.getElementById('searchInput').value.trim();
+            
+            if (!query) {
+                alert('검색어를 입력해주세요');
+                return;
+            }
+
+            const apiKey = getApiKey();
+            const searchResults = document.getElementById('searchResults');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/categories/search?query=${encodeURIComponent(query)}&limit=20&api_key=${apiKey}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    let html = `<h4>검색 결과: "${query}" (${data.count}개)</h4>`;
+                    data.results.forEach((category, index) => {
+                        html += `
+                            <div class="category-list-item">
+                                <span>${index + 1}. ${category}</span>
+                            </div>
+                        `;
+                    });
+                    searchResults.innerHTML = html;
+                } else {
+                    searchResults.innerHTML = '<div style="text-align: center; color: #dc3545;">검색 실패</div>';
+                }
+            } catch (error) {
+                searchResults.innerHTML = '<div style="text-align: center; color: #dc3545;">검색 중 오류 발생</div>';
+            }
+        }
+
+        // 페이지 로드 시 연결 테스트
+        window.addEventListener('load', function() {
+            setTimeout(testConnection, 1000);
+        });
+    </script>
+</body>
+</html>

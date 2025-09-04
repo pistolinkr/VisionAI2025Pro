@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionAI Pro Advanced - 고성능 이미지 분류</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #333;
+            margin: 0;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            color: #666;
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+        }
+        .model-info {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .model-info h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        .model-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 50px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9ff;
+        }
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+            transform: translateY(-2px);
+        }
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #e8ebff;
+            transform: scale(1.02);
+        }
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn.secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 25px;
+        }
+        .control-group label {
+            font-weight: 500;
+            color: #333;
+        }
+        .control-group select, .control-group input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background: white;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        .result-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .result-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1.4em;
+        }
+        .success-icon {
+            color: #28a745;
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .category-item:hover {
+            transform: translateX(5px);
+        }
+        .category-info {
+            flex: 1;
+        }
+        .category-name {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+        .category-confidence {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .progress-container {
+            width: 200px;
+            margin-left: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.8s ease;
+            border-radius: 15px;
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #dc3545;
+        }
+        .api-key-section {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+        .api-key-section h4 {
+            margin: 0 0 10px 0;
+            color: #0056b3;
+        }
+        .api-key-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 VisionAI Pro Advanced</h1>
+            <p>고성능 이미지 분류 시스템 - ResNet50 + ImageNet 1000 카테고리</p>
+        </div>
+
+        <div class="model-info">
+            <h3>🚀 고성능 모델 정보</h3>
+            <div class="model-stats">
+                <div class="stat">
+                    <span class="stat-value">ResNet50</span>
+                    <span class="stat-label">모델</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">1000+</span>
+                    <span class="stat-label">카테고리</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">76.1%</span>
+                    <span class="stat-label">정확도</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">0.5-2초</span>
+                    <span class="stat-label">처리시간</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="api-key-section">
+            <h4>🔑 API 키 설정</h4>
+            <input type="text" id="apiKeyInput" class="api-key-input" 
+                   placeholder="API 키를 입력하세요 (예: qz-U2PdzQxYLnGRzSHvBV8eWrk1BnjPe2IKZzkxgKGk)" 
+                   value="qz-U2PdzQxYLnGRzSHvBV8eWrk1BnjPe2IKZzkxgKGk">
+            <button class="btn" onclick="testConnection()">연결 테스트</button>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+            <h3>📁 이미지 업로드</h3>
+            <p>이미지를 드래그하거나 클릭하여 선택하세요</p>
+            <input type="file" id="imageInput" accept="image/*" style="display: none;">
+            <button class="btn" onclick="document.getElementById('imageInput').click()">이미지 선택</button>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="modelSelect">모델:</label>
+                <select id="modelSelect">
+                    <option value="resnet50">ResNet50 (기본)</option>
+                    <option value="efficientnet">EfficientNet</option>
+                    <option value="ensemble">앙상블 (ResNet50 + EfficientNet)</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="topKInput">결과 수:</label>
+                <input type="number" id="topKInput" value="5" min="1" max="10">
+            </div>
+            <div class="control-group">
+                <label for="thresholdInput">신뢰도 임계값:</label>
+                <input type="number" id="thresholdInput" value="0.1" min="0" max="1" step="0.1">
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn" id="classifyBtn" onclick="classifyImage()" disabled>분류 시작</button>
+            <button class="btn secondary" onclick="clearResult()">결과 지우기</button>
+        </div>
+
+        <div id="result" class="result" style="display: none;">
+            <div class="result-header">
+                <span class="success-icon">✅</span>
+                <h3>분류 결과</h3>
+            </div>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // 설정
+        const API_BASE_URL = "http://localhost:8001";
+        let selectedFile = null;
+
+        // API 키 가져오기
+        function getApiKey() {
+            return document.getElementById('apiKeyInput').value.trim();
+        }
+
+        // 연결 테스트
+        async function testConnection() {
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                alert('API 키를 입력해주세요');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const data = await response.json();
+                
+                if (data.status === 'healthy') {
+                    alert('✅ 서버 연결 성공!\n\n모델 정보:\n' + 
+                          `- 타입: ${data.model_info.model_type}\n` +
+                          `- 카테고리 수: ${data.model_info.categories_count}\n` +
+                          `- 장치: ${data.model_info.device}`);
+                } else {
+                    alert('❌ 서버 연결 실패');
+                }
+            } catch (error) {
+                alert('❌ 서버 연결 실패: ' + error.message);
+            }
+        }
+
+        // 파일 선택 처리
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            selectedFile = e.target.files[0];
+            if (selectedFile) {
+                document.getElementById('classifyBtn').disabled = false;
+                showPreview(selectedFile);
+            }
+        });
+
+        // 드래그 앤 드롭 처리
+        const uploadArea = document.getElementById('uploadArea');
+        
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            selectedFile = e.dataTransfer.files[0];
+            if (selectedFile && selectedFile.type.startsWith('image/')) {
+                document.getElementById('classifyBtn').disabled = false;
+                showPreview(selectedFile);
+            }
+        });
+
+        // 이미지 미리보기
+        function showPreview(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadArea.innerHTML = `
+                    <h3>📁 선택된 이미지</h3>
+                    <img src="${e.target.result}" style="max-width: 300px; max-height: 300px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <p><strong>파일명:</strong> ${file.name}</p>
+                    <p><strong>크기:</strong> ${(file.size / 1024).toFixed(1)} KB</p>
+                    <button class="btn" onclick="document.getElementById('imageInput').click()">다른 이미지 선택</button>
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 이미지 분류
+        async function classifyImage() {
+            if (!selectedFile) {
+                alert('이미지를 선택해주세요');
+                return;
+            }
+
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                alert('API 키를 입력해주세요');
+                return;
+            }
+
+            const classifyBtn = document.getElementById('classifyBtn');
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+
+            // 버튼 비활성화
+            classifyBtn.disabled = true;
+            classifyBtn.textContent = '분류 중...';
+
+            // 결과 영역 표시
+            resultDiv.style.display = 'block';
+            resultContent.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>고성능 모델로 이미지를 분석하고 있습니다...</p>
+                </div>
+            `;
+
+            try {
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+                formData.append('top_k', document.getElementById('topKInput').value);
+                formData.append('use_ensemble', document.getElementById('modelSelect').value === 'ensemble');
+                formData.append('confidence_threshold', document.getElementById('thresholdInput').value);
+                formData.append('api_key', apiKey);
+
+                const response = await fetch(`${API_BASE_URL}/api/classify`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayResult(result);
+                } else {
+                    throw new Error(result.detail || '분류 실패');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                resultContent.innerHTML = `
+                    <div class="error">
+                        <h4>❌ 오류 발생</h4>
+                        <p>${error.message}</p>
+                        <p>서버가 실행 중인지 확인해주세요. (포트 8001)</p>
+                    </div>
+                `;
+            } finally {
+                // 버튼 활성화
+                classifyBtn.disabled = false;
+                classifyBtn.textContent = '분류 시작';
+            }
+        }
+
+        // 결과 표시
+        function displayResult(result) {
+            const resultContent = document.getElementById('resultContent');
+            
+            let html = `
+                <div style="margin-bottom: 20px; padding: 15px; background: #e8f5e8; border-radius: 10px;">
+                    <h4>✅ 분류 완료</h4>
+                    <p><strong>이미지:</strong> ${result.image_name}</p>
+                    <p><strong>처리 시간:</strong> ${result.processing_time}초</p>
+                    <p><strong>모델:</strong> ${result.model_info.model_type || '앙상블'}</p>
+                </div>
+                <h4>🏆 상위 분류 결과</h4>
+            `;
+
+            result.predictions.forEach((pred, index) => {
+                const percentage = (pred.confidence * 100).toFixed(1);
+                const isTopResult = index === 0;
+                
+                html += `
+                    <div class="category-item" style="${isTopResult ? 'border: 2px solid #667eea;' : ''}">
+                        <div class="category-info">
+                            <div class="category-name">${index + 1}. ${pred.category}</div>
+                            <div class="category-confidence">신뢰도: ${pred.confidence.toFixed(4)}</div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${percentage}%"></div>
+                                <div class="progress-text">${percentage}%</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultContent.innerHTML = html;
+        }
+
+        // 결과 지우기
+        function clearResult() {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('imageInput').value = '';
+            selectedFile = null;
+            document.getElementById('classifyBtn').disabled = true;
+            uploadArea.innerHTML = `
+                <h3>📁 이미지 업로드</h3>
+                <p>이미지를 드래그하거나 클릭하여 선택하세요</p>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                <button class="btn" onclick="document.getElementById('imageInput').click()">이미지 선택</button>
+            `;
+        }
+
+        // 페이지 로드 시 연결 테스트
+        window.addEventListener('load', function() {
+            setTimeout(testConnection, 1000);
+        });
+    </script>
+</body>
+</html>

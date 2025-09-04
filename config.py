@@ -30,7 +30,8 @@ class Config:
     
     # Model configuration
     MODEL_PATH = os.getenv("MODEL_PATH", str(MODELS_DIR / "prorl_v2_model"))
-    DEVICE = os.getenv("DEVICE", "cpu")
+    # 젯슨 환경에서는 GPU 사용 가능 여부 확인
+    DEVICE = os.getenv("DEVICE", "cuda" if os.path.exists("/dev/nvidia0") else "cpu")
     
     # Image configuration
     UPLOAD_DIR = os.getenv("UPLOAD_DIR", str(UPLOADS_DIR))

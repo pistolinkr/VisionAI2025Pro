@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 분류 웹앱</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .upload-area:hover {
+            border-color: #007bff;
+        }
+        .upload-area.dragover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #007bff;
+            transition: width 0.3s;
+        }
+        .api-key-info {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 VisionAI Pro 이미지 분류</h1>
+        
+        <div class="api-key-info">
+            <h3>🔑 API 키 정보</h3>
+            <p><strong>API 키:</strong> <code id="apiKey">qz-U2PdzQxYLnGRzSHvBV8eWrk1BnjPe2IKZzkxgKGk</code></p>
+            <p><strong>서버:</strong> <code>http://localhost:8000</code></p>
+            <button class="btn" onclick="copyApiKey()">API 키 복사</button>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+            <h3>📁 이미지 업로드</h3>
+            <p>이미지를 드래그하거나 클릭하여 선택하세요</p>
+            <input type="file" id="imageInput" accept="image/*" style="display: none;">
+            <button class="btn" onclick="document.getElementById('imageInput').click()">이미지 선택</button>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn" id="classifyBtn" onclick="classifyImage()" disabled>분류 시작</button>
+            <button class="btn" onclick="clearResult()">결과 지우기</button>
+        </div>
+
+        <div id="result" class="result" style="display: none;">
+            <h3>📊 분류 결과</h3>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // API 키 설정
+        const API_KEY = "qz-U2PdzQxYLnGRzSHvBV8eWrk1BnjPe2IKZzkxgKGk";
+        const API_BASE_URL = "http://localhost:8000";
+        
+        let selectedFile = null;
+
+        // API 키 복사
+        function copyApiKey() {
+            navigator.clipboard.writeText(API_KEY).then(() => {
+                alert('API 키가 클립보드에 복사되었습니다!');
+            });
+        }
+
+        // 파일 선택 처리
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            selectedFile = e.target.files[0];
+            if (selectedFile) {
+                document.getElementById('classifyBtn').disabled = false;
+                showPreview(selectedFile);
+            }
+        });
+
+        // 드래그 앤 드롭 처리
+        const uploadArea = document.getElementById('uploadArea');
+        
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            selectedFile = e.dataTransfer.files[0];
+            if (selectedFile && selectedFile.type.startsWith('image/')) {
+                document.getElementById('classifyBtn').disabled = false;
+                showPreview(selectedFile);
+            }
+        });
+
+        // 이미지 미리보기
+        function showPreview(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadArea.innerHTML = `
+                    <h3>📁 선택된 이미지</h3>
+                    <img src="${e.target.result}" style="max-width: 200px; max-height: 200px; border-radius: 5px;">
+                    <p>파일명: ${file.name}</p>
+                    <p>크기: ${(file.size / 1024).toFixed(1)} KB</p>
+                    <button class="btn" onclick="document.getElementById('imageInput').click()">다른 이미지 선택</button>
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 이미지 분류
+        async function classifyImage() {
+            if (!selectedFile) {
+                alert('이미지를 선택해주세요');
+                return;
+            }
+
+            const classifyBtn = document.getElementById('classifyBtn');
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+
+            // 버튼 비활성화
+            classifyBtn.disabled = true;
+            classifyBtn.textContent = '분류 중...';
+
+            // 결과 영역 표시
+            resultDiv.style.display = 'block';
+            resultContent.innerHTML = '<p>이미지를 분석하고 있습니다...</p>';
+
+            try {
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+                formData.append('top_k', '5');
+
+                const response = await fetch(`${API_BASE_URL}/api/classify`, {
+                    method: 'POST',
+                    headers: {
+                        'X-API-Key': API_KEY
+                    },
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayResult(result);
+                } else {
+                    throw new Error(result.detail || '분류 실패');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                resultContent.innerHTML = `
+                    <div style="color: red;">
+                        <h4>❌ 오류 발생</h4>
+                        <p>${error.message}</p>
+                        <p>서버가 실행 중인지 확인해주세요.</p>
+                    </div>
+                `;
+            } finally {
+                // 버튼 활성화
+                classifyBtn.disabled = false;
+                classifyBtn.textContent = '분류 시작';
+            }
+        }
+
+        // 결과 표시
+        function displayResult(result) {
+            const resultContent = document.getElementById('resultContent');
+            
+            let html = `
+                <div style="margin-bottom: 20px;">
+                    <h4>✅ 분류 완료</h4>
+                    <p><strong>이미지:</strong> ${result.image_name}</p>
+                    <p><strong>처리 시간:</strong> ${result.processing_time ? result.processing_time.toFixed(2) + '초' : 'N/A'}</p>
+                </div>
+                <h4>🏆 상위 분류 결과</h4>
+            `;
+
+            result.predictions.forEach((pred, index) => {
+                const percentage = (pred.confidence * 100).toFixed(1);
+                html += `
+                    <div class="category-item">
+                        <div>
+                            <strong>${index + 1}. ${pred.category}</strong>
+                        </div>
+                        <div style="width: 200px;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${percentage}%"></div>
+                            </div>
+                            <span>${percentage}%</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultContent.innerHTML = html;
+        }
+
+        // 결과 지우기
+        function clearResult() {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('imageInput').value = '';
+            selectedFile = null;
+            document.getElementById('classifyBtn').disabled = true;
+            uploadArea.innerHTML = `
+                <h3>📁 이미지 업로드</h3>
+                <p>이미지를 드래그하거나 클릭하여 선택하세요</p>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                <button class="btn" onclick="document.getElementById('imageInput').click()">이미지 선택</button>
+            `;
+        }
+    </script>
+</body>
+</html>
