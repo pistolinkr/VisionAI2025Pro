@@ -67,12 +67,8 @@ async def startup_event():
     """서버 시작 시 초기화"""
     logger.info("🚀 VisionAI Pro Zero-Shot Custom Classification API 시작")
     
-    # 모델 초기화
-    try:
-        get_classifier()
-        logger.info("✅ Zero-shot 분류기 초기화 완료")
-    except Exception as e:
-        logger.error(f"❌ 분류기 초기화 실패: {e}")
+    # 모델은 lazy loading으로 첫 요청 시에만 초기화
+    logger.info("✅ 서버 준비 완료 (모델은 첫 요청 시 초기화)")
 
 @app.get("/")
 async def root():
