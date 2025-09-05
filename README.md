@@ -133,7 +133,7 @@ brew install git
 #### Installation Steps (설치 단계)
 ```bash
 # Clone repository
-git clone <repository-url>
+git clone https://github.com/pistolinkr/VisionAI2025Pro
 cd "ProRL V2 for catagorize images copy"
 
 # Create virtual environment

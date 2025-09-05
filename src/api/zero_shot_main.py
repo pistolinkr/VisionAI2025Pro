@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 # FastAPI 앱 생성
 app = FastAPI(
     title="VisionAI Pro Zero-Shot Custom Classification API",
-    description="Zero-shot Learning 기반 커스텀 이미지 분류 API - base_words.txt 사용",
-    version="3.0.0"
+    description="Zero-shot Learning 기반 커스텀 이미지 분류 API - base_words.txt + building_terms.csv 사용",
+    version="3.1.0"
 )
 
 # CORS 설정
@@ -46,7 +46,11 @@ def get_classifier() -> ZeroShotCustomClassifier:
     global classifier
     if classifier is None:
         base_words_path = os.getenv("BASE_WORDS_PATH", "query/base_words.txt")
-        classifier = ZeroShotCustomClassifier(base_words_path=base_words_path)
+        building_terms_path = os.getenv("BUILDING_TERMS_PATH", "query/building_terms_clean_final.csv")
+        classifier = ZeroShotCustomClassifier(
+            base_words_path=base_words_path,
+            building_terms_path=building_terms_path
+        )
     return classifier
 
 def verify_api_key(api_key: str) -> bool:
@@ -75,14 +79,15 @@ async def root():
     """루트 엔드포인트"""
     return {
         "message": "VisionAI Pro Zero-Shot Custom Classification API",
-        "version": "3.0.0",
+        "version": "3.1.0",
         "status": "running",
         "model": "CLIP (Zero-shot Learning)",
-        "categories": "base_words.txt 기반 커스텀 카테고리",
+        "categories": "base_words.txt + building_terms.csv 기반 커스텀 카테고리",
         "features": [
             "Zero-shot Learning",
             "커스텀 카테고리 추가/제거",
             "카테고리 검색",
+            "건물 용어 통합",
             "실시간 학습"
         ]
     }
@@ -134,6 +139,40 @@ async def get_categories(
         }
     except Exception as e:
         logger.error(f"카테고리 목록 조회 실패: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/building-categories")
+async def get_building_categories(
+    api_key: str = Query(None),
+    search: str = Query(None),
+    limit: int = Query(50, ge=1, le=1000)
+):
+    """건물 관련 카테고리 목록 반환"""
+    if api_key and not verify_api_key(api_key):
+        raise HTTPException(status_code=401, detail="Invalid API key")
+    
+    try:
+        classifier = get_classifier()
+        
+        if search:
+            # 건물 카테고리에서 검색
+            all_categories = classifier.get_building_categories()
+            # 간단한 텍스트 검색 (향후 개선 가능)
+            filtered_categories = [cat for cat in all_categories if search.lower() in cat.lower()]
+            categories = filtered_categories[:limit]
+        else:
+            # 전체 건물 카테고리
+            categories = classifier.get_building_categories()[:limit]
+        
+        return {
+            "success": True,
+            "building_categories": categories,
+            "count": len(categories),
+            "total_count": len(classifier.get_building_categories()),
+            "search_query": search if search else None
+        }
+    except Exception as e:
+        logger.error(f"건물 카테고리 목록 조회 실패: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/classify")
