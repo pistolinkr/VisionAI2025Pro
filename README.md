@@ -1,5 +1,9 @@
 # VisionAI Pro Image Classification System
 
+## 🌍 **Language Selection**
+
+**[🇺🇸 English](#-key-features)** | **[🇰🇷 Korean](#-korean)** | **[🇨🇳 Chinese](#-chinese)** | **[🇪🇸 Spanish](#-spanish)** | **[🇫🇷 French](#-french)** | **[🇩🇪 German](#-german)** | **[🇵🇹 Portuguese](#-portuguese)** | **[🇸🇦 Arabic](#-arabic)** | **[🇮🇳 Hindi](#-hindi)** | **[🇯🇵 Japanese](#-japanese)** | **[🇷🇺 Russian](#-russian)** | **[🇮🇩 Indonesian](#-indonesian)** | **[🇻🇳 Vietnamese](#-vietnamese)** | **[🇹🇷 Turkish](#-turkish)** | **[🇮🇹 Italian](#-italian)** | **[🇲🇽 Latin (Mexico)](#-latin-mexico)**
+
 🧠 **High-Performance Image Classification System** - Multi-classification engine utilizing Zero-shot Learning and pre-trained models
 
 ## 📁 Project Structure
@@ -187,7 +191,7 @@ Bug reports, feature requests, and pull requests are welcome!
 
 ---
 
-# VisionAI Pro 이미지 분류 시스템
+# VisionAI Pro 이미지 분류 시스템 {#korean}
 
 🧠 **고성능 이미지 분류 시스템** - Zero-shot Learning과 사전 훈련된 모델을 활용한 다중 분류 엔진
 
@@ -376,7 +380,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# VisionAI Pro 图像分类系统
+# VisionAI Pro 图像分类系统 {#chinese}
 
 🧠 **高性能图像分类系统** - 利用零样本学习和预训练模型的多分类引擎
 
@@ -565,7 +569,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🔍 VisionAI Pro - Sistema de Clasificación de Imágenes
+# 🔍 VisionAI Pro - Sistema de Clasificación de Imágenes {#spanish}
 
 Un sistema de clasificación de imágenes basado en ProRL V2 que proporciona una interfaz web estilo Pinterest y API REST con **soporte de backend Firebase**.
 
@@ -642,7 +646,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Système de Classification d'Images
+# 🔍 VisionAI Pro - Système de Classification d'Images {#french}
 
 Un système de classification d'images basé sur ProRL V2 qui fournit une interface web style Pinterest et une API REST avec **support de backend Firebase**.
 
@@ -719,7 +723,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Bildklassifizierungssystem
+# 🔍 VisionAI Pro - Bildklassifizierungssystem {#german}
 
 Ein ProRL V2-basiertes Bildklassifizierungssystem, das eine Pinterest-ähnliche Web-Oberfläche und REST-API mit **Firebase Backend-Unterstützung** bietet.
 
@@ -793,3 +797,773 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 ---
 
 **VisionAI Pro** - Neuer Standard in der Bildklassifizierung 🚀
+
+---
+
+# 🔍 VisionAI Pro - Sistema de Classificação de Imagens {#portuguese}
+
+Um sistema de classificação de imagens baseado em ProRL V2 que fornece uma interface web estilo Pinterest e API REST com **suporte de backend Firebase**.
+
+## 🔥 Integração Firebase
+
+Este sistema agora suporta **Firebase Firestore** como banco de dados backend, fornecendo:
+
+- **Armazenamento em Nuvem**: Todos os dados armazenados com segurança no Firebase Firestore
+- **Sincronização em Tempo Real**: Sincronização automática de dados entre dispositivos
+- **Escalabilidade**: Construído para aplicações de alto tráfego
+- **Gestão de Usuários**: Perfis de usuário avançados e estatísticas de uso
+- **Analytics**: Rastreamento detalhado de uso e métricas de performance
+- **Histórico**: Histórico completo de classificação para cada usuário
+
+## ✨ Características Principais
+
+- **Classificação de Imagens IA**: Classificação precisa de categorias de imagens usando o modelo ProRL V2
+- **API REST**: Serviço API seguro com autenticação baseada em chave API
+- **Interface Web**: Interface intuitiva estilo Pinterest para busca e classificação de imagens
+- **Ferramenta CLI**: Classificação de imagens via linha de comando e gestão de chaves API
+- **Análise em Tempo Real**: Classificação imediata e visualização de resultados de imagens carregadas
+
+## 🚀 Início Rápido
+
+### 1. Configuração do Ambiente
+
+```bash
+# Clonar repositório
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# Criar e ativar ambiente virtual
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Instalar dependências
+pip install -r config/requirements.txt
+```
+
+### 2. Variáveis de Ambiente
+
+```bash
+# Criar arquivo .env (referir-se ao env_example.txt)
+cp config/env_example.txt .env
+
+# Editar arquivo .env com valores reais
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # ou cuda
+```
+
+### 3. Iniciar Servidor
+
+#### Opção A: SQLite (Padrão)
+```bash
+# Executar servidor principal com SQLite
+python3 main.py zero-shot
+
+# Ou executar uvicorn diretamente
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### Opção B: Firebase
+```bash
+# Executar servidor baseado em Firebase
+python3 main.py firebase
+
+# Ou executar uvicorn diretamente
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - Novo padrão em classificação de imagens 🚀
+
+---
+
+# 🔍 VisionAI Pro - نظام تصنيف الصور {#arabic}
+
+نظام تصنيف الصور القائم على ProRL V2 الذي يوفر واجهة ويب على طراز Pinterest وواجهة برمجة تطبيقات REST مع **دعم خادم Firebase**.
+
+## 🔥 تكامل Firebase
+
+يدعم هذا النظام الآن **Firebase Firestore** كقاعدة بيانات خلفية، مما يوفر:
+
+- **التخزين السحابي**: جميع البيانات مخزنة بأمان في Firebase Firestore
+- **المزامنة في الوقت الفعلي**: مزامنة تلقائية للبيانات بين الأجهزة
+- **القابلية للتوسع**: مصمم للتطبيقات عالية الحركة
+- **إدارة المستخدمين**: ملفات مستخدمين متقدمة وإحصائيات الاستخدام
+- **التحليلات**: تتبع مفصل للاستخدام ومقاييس الأداء
+- **السجل**: سجل كامل للتصنيف لكل مستخدم
+
+## ✨ الميزات الرئيسية
+
+- **تصنيف الصور بالذكاء الاصطناعي**: تصنيف دقيق لفئات الصور باستخدام نموذج ProRL V2
+- **واجهة برمجة تطبيقات REST**: خدمة API آمنة مع المصادقة القائمة على مفتاح API
+- **واجهة الويب**: واجهة بديهية على طراز Pinterest للبحث وتصنيف الصور
+- **أداة CLI**: تصنيف الصور من سطر الأوامر وإدارة مفاتيح API
+- **التحليل في الوقت الفعلي**: تصنيف فوري وعرض نتائج الصور المرفوعة
+
+## 🚀 البدء السريع
+
+### 1. إعداد البيئة
+
+```bash
+# استنساخ المستودع
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# إنشاء وتفعيل البيئة الافتراضية
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# تثبيت التبعيات
+pip install -r config/requirements.txt
+```
+
+### 2. متغيرات البيئة
+
+```bash
+# إنشاء ملف .env (الرجوع إلى env_example.txt)
+cp config/env_example.txt .env
+
+# تحرير ملف .env بقيم حقيقية
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # أو cuda
+```
+
+### 3. بدء الخادم
+
+#### الخيار أ: SQLite (افتراضي)
+```bash
+# تشغيل الخادم الرئيسي مع SQLite
+python3 main.py zero-shot
+
+# أو تشغيل uvicorn مباشرة
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### الخيار ب: Firebase
+```bash
+# تشغيل الخادم القائم على Firebase
+python3 main.py firebase
+
+# أو تشغيل uvicorn مباشرة
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - معيار جديد في تصنيف الصور 🚀
+
+---
+
+# 🔍 VisionAI Pro - छवि वर्गीकरण प्रणाली {#hindi}
+
+ProRL V2 आधारित छवि वर्गीकरण प्रणाली जो **Firebase बैकएंड समर्थन** के साथ Pinterest-शैली वेब इंटरफेस और REST API प्रदान करती है।
+
+## 🔥 Firebase एकीकरण
+
+यह प्रणाली अब **Firebase Firestore** को बैकएंड डेटाबेस के रूप में समर्थन करती है, प्रदान करती है:
+
+- **क्लाउड स्टोरेज**: सभी डेटा Firebase Firestore में सुरक्षित रूप से संग्रहीत
+- **रियल-टाइम सिंक्रनाइज़ेशन**: डिवाइसों के बीच डेटा का स्वचालित सिंक्रनाइज़ेशन
+- **स्केलेबिलिटी**: उच्च-ट्रैफिक अनुप्रयोगों के लिए निर्मित
+- **उपयोगकर्ता प्रबंधन**: उन्नत उपयोगकर्ता प्रोफाइल और उपयोग आंकड़े
+- **एनालिटिक्स**: विस्तृत उपयोग ट्रैकिंग और प्रदर्शन मेट्रिक्स
+- **इतिहास**: प्रत्येक उपयोगकर्ता के लिए पूर्ण वर्गीकरण इतिहास
+
+## ✨ मुख्य विशेषताएं
+
+- **AI छवि वर्गीकरण**: ProRL V2 मॉडल का उपयोग करके छवि श्रेणियों का सटीक वर्गीकरण
+- **REST API**: API कुंजी-आधारित प्रमाणीकरण के साथ सुरक्षित API सेवा
+- **वेब इंटरफेस**: छवि खोज और वर्गीकरण के लिए सहज Pinterest-शैली इंटरफेस
+- **CLI उपकरण**: कमांड लाइन छवि वर्गीकरण और API कुंजी प्रबंधन
+- **रियल-टाइम विश्लेषण**: अपलोड की गई छवियों का तत्काल वर्गीकरण और परिणाम प्रदर्शन
+
+## 🚀 त्वरित प्रारंभ
+
+### 1. पर्यावरण सेटअप
+
+```bash
+# रिपॉजिटरी क्लोन करें
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# वर्चुअल एनवायरनमेंट बनाएं और सक्रिय करें
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# निर्भरताएं स्थापित करें
+pip install -r config/requirements.txt
+```
+
+### 2. पर्यावरण चर
+
+```bash
+# .env फ़ाइल बनाएं (env_example.txt देखें)
+cp config/env_example.txt .env
+
+# .env फ़ाइल को वास्तविक मूल्यों के साथ संपादित करें
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # या cuda
+```
+
+### 3. सर्वर शुरू करें
+
+#### विकल्प ए: SQLite (डिफ़ॉल्ट)
+```bash
+# SQLite के साथ मुख्य सर्वर चलाएं
+python3 main.py zero-shot
+
+# या सीधे uvicorn चलाएं
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### विकल्प बी: Firebase
+```bash
+# Firebase-आधारित सर्वर चलाएं
+python3 main.py firebase
+
+# या सीधे uvicorn चलाएं
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - छवि वर्गीकरण में नया मानक 🚀
+
+---
+
+# 🔍 VisionAI Pro - 画像分類システム {#japanese}
+
+ProRL V2ベースの画像分類システムで、**Firebaseバックエンドサポート**付きのPinterestスタイルのWebインターフェースとREST APIを提供します。
+
+## 🔥 Firebase統合
+
+このシステムは現在、バックエンドデータベースとして**Firebase Firestore**をサポートし、以下を提供します：
+
+- **クラウドストレージ**: すべてのデータがFirebase Firestoreに安全に保存
+- **リアルタイム同期**: デバイス間でのデータの自動同期
+- **スケーラビリティ**: 高トラフィックアプリケーション向けに構築
+- **ユーザー管理**: 高度なユーザープロファイルと使用統計
+- **アナリティクス**: 詳細な使用追跡とパフォーマンスメトリクス
+- **履歴**: 各ユーザーの完全な分類履歴
+
+## ✨ 主な機能
+
+- **AI画像分類**: ProRL V2モデルを使用した画像カテゴリの正確な分類
+- **REST API**: APIキーベースの認証による安全なAPIサービス
+- **Webインターフェース**: 画像検索と分類のための直感的なPinterestスタイルインターフェース
+- **CLIツール**: コマンドライン画像分類とAPIキー管理
+- **リアルタイム分析**: アップロードされた画像の即座の分類と結果表示
+
+## 🚀 クイックスタート
+
+### 1. 環境セットアップ
+
+```bash
+# リポジトリをクローン
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# 仮想環境を作成してアクティベート
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# 依存関係をインストール
+pip install -r config/requirements.txt
+```
+
+### 2. 環境変数
+
+```bash
+# .envファイルを作成（env_example.txtを参照）
+cp config/env_example.txt .env
+
+# .envファイルを実際の値で編集
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # または cuda
+```
+
+### 3. サーバー開始
+
+#### オプションA: SQLite（デフォルト）
+```bash
+# SQLiteでメインサーバーを実行
+python3 main.py zero-shot
+
+# またはuvicornを直接実行
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### オプションB: Firebase
+```bash
+# Firebaseベースのサーバーを実行
+python3 main.py firebase
+
+# またはuvicornを直接実行
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - 画像分類の新しい標準 🚀
+
+---
+
+# 🔍 VisionAI Pro - Система классификации изображений {#russian}
+
+Система классификации изображений на основе ProRL V2, которая предоставляет веб-интерфейс в стиле Pinterest и REST API с **поддержкой Firebase бэкенда**.
+
+## 🔥 Интеграция Firebase
+
+Эта система теперь поддерживает **Firebase Firestore** в качестве бэкенд базы данных, предоставляя:
+
+- **Облачное хранилище**: Все данные безопасно хранятся в Firebase Firestore
+- **Синхронизация в реальном времени**: Автоматическая синхронизация данных между устройствами
+- **Масштабируемость**: Построена для высоконагруженных приложений
+- **Управление пользователями**: Расширенные профили пользователей и статистика использования
+- **Аналитика**: Детальное отслеживание использования и метрики производительности
+- **История**: Полная история классификации для каждого пользователя
+
+## ✨ Основные функции
+
+- **ИИ классификация изображений**: Точная классификация категорий изображений с использованием модели ProRL V2
+- **REST API**: Безопасный API сервис с аутентификацией на основе API ключа
+- **Веб-интерфейс**: Интуитивный интерфейс в стиле Pinterest для поиска и классификации изображений
+- **CLI инструмент**: Классификация изображений из командной строки и управление API ключами
+- **Анализ в реальном времени**: Мгновенная классификация и отображение результатов загруженных изображений
+
+## 🚀 Быстрый старт
+
+### 1. Настройка окружения
+
+```bash
+# Клонировать репозиторий
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# Создать и активировать виртуальное окружение
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Установить зависимости
+pip install -r config/requirements.txt
+```
+
+### 2. Переменные окружения
+
+```bash
+# Создать файл .env (см. env_example.txt)
+cp config/env_example.txt .env
+
+# Отредактировать файл .env с реальными значениями
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # или cuda
+```
+
+### 3. Запуск сервера
+
+#### Вариант А: SQLite (по умолчанию)
+```bash
+# Запустить основной сервер с SQLite
+python3 main.py zero-shot
+
+# Или запустить uvicorn напрямую
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### Вариант Б: Firebase
+```bash
+# Запустить сервер на основе Firebase
+python3 main.py firebase
+
+# Или запустить uvicorn напрямую
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - Новый стандарт в классификации изображений 🚀
+
+---
+
+# 🔍 VisionAI Pro - Sistem Klasifikasi Gambar {#indonesian}
+
+Sistem klasifikasi gambar berbasis ProRL V2 yang menyediakan antarmuka web bergaya Pinterest dan REST API dengan **dukungan backend Firebase**.
+
+## 🔥 Integrasi Firebase
+
+Sistem ini sekarang mendukung **Firebase Firestore** sebagai database backend, menyediakan:
+
+- **Penyimpanan Cloud**: Semua data disimpan dengan aman di Firebase Firestore
+- **Sinkronisasi Real-time**: Sinkronisasi otomatis data antar perangkat
+- **Skalabilitas**: Dibangun untuk aplikasi ber-traffic tinggi
+- **Manajemen Pengguna**: Profil pengguna canggih dan statistik penggunaan
+- **Analitik**: Pelacakan penggunaan detail dan metrik kinerja
+- **Riwayat**: Riwayat klasifikasi lengkap untuk setiap pengguna
+
+## ✨ Fitur Utama
+
+- **Klasifikasi Gambar AI**: Klasifikasi akurat kategori gambar menggunakan model ProRL V2
+- **REST API**: Layanan API aman dengan autentikasi berbasis kunci API
+- **Antarmuka Web**: Antarmuka intuitif bergaya Pinterest untuk pencarian dan klasifikasi gambar
+- **Tool CLI**: Klasifikasi gambar dari baris perintah dan manajemen kunci API
+- **Analisis Real-time**: Klasifikasi instan dan tampilan hasil gambar yang diunggah
+
+## 🚀 Mulai Cepat
+
+### 1. Pengaturan Lingkungan
+
+```bash
+# Klon repositori
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# Buat dan aktifkan lingkungan virtual
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Install dependensi
+pip install -r config/requirements.txt
+```
+
+### 2. Variabel Lingkungan
+
+```bash
+# Buat file .env (lihat env_example.txt)
+cp config/env_example.txt .env
+
+# Edit file .env dengan nilai yang sebenarnya
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # atau cuda
+```
+
+### 3. Mulai Server
+
+#### Opsi A: SQLite (Default)
+```bash
+# Jalankan server utama dengan SQLite
+python3 main.py zero-shot
+
+# Atau jalankan uvicorn langsung
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### Opsi B: Firebase
+```bash
+# Jalankan server berbasis Firebase
+python3 main.py firebase
+
+# Atau jalankan uvicorn langsung
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - Standar baru dalam klasifikasi gambar 🚀
+
+---
+
+# 🔍 VisionAI Pro - Hệ Thống Phân Loại Hình Ảnh {#vietnamese}
+
+Hệ thống phân loại hình ảnh dựa trên ProRL V2 cung cấp giao diện web kiểu Pinterest và REST API với **hỗ trợ backend Firebase**.
+
+## 🔥 Tích Hợp Firebase
+
+Hệ thống này hiện hỗ trợ **Firebase Firestore** làm cơ sở dữ liệu backend, cung cấp:
+
+- **Lưu Trữ Đám Mây**: Tất cả dữ liệu được lưu trữ an toàn trong Firebase Firestore
+- **Đồng Bộ Thời Gian Thực**: Đồng bộ tự động dữ liệu giữa các thiết bị
+- **Khả Năng Mở Rộng**: Được xây dựng cho các ứng dụng có lưu lượng cao
+- **Quản Lý Người Dùng**: Hồ sơ người dùng nâng cao và thống kê sử dụng
+- **Phân Tích**: Theo dõi chi tiết việc sử dụng và các chỉ số hiệu suất
+- **Lịch Sử**: Lịch sử phân loại đầy đủ cho mỗi người dùng
+
+## ✨ Tính Năng Chính
+
+- **Phân Loại Hình Ảnh AI**: Phân loại chính xác các danh mục hình ảnh sử dụng mô hình ProRL V2
+- **REST API**: Dịch vụ API an toàn với xác thực dựa trên khóa API
+- **Giao Diện Web**: Giao diện trực quan kiểu Pinterest để tìm kiếm và phân loại hình ảnh
+- **Công Cụ CLI**: Phân loại hình ảnh từ dòng lệnh và quản lý khóa API
+- **Phân Tích Thời Gian Thực**: Phân loại tức thì và hiển thị kết quả hình ảnh đã tải lên
+
+## 🚀 Bắt Đầu Nhanh
+
+### 1. Thiết Lập Môi Trường
+
+```bash
+# Sao chép kho lưu trữ
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# Tạo và kích hoạt môi trường ảo
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Cài đặt các phụ thuộc
+pip install -r config/requirements.txt
+```
+
+### 2. Biến Môi Trường
+
+```bash
+# Tạo file .env (tham khảo env_example.txt)
+cp config/env_example.txt .env
+
+# Chỉnh sửa file .env với các giá trị thực
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # hoặc cuda
+```
+
+### 3. Khởi Động Máy Chủ
+
+#### Tùy Chọn A: SQLite (Mặc Định)
+```bash
+# Chạy máy chủ chính với SQLite
+python3 main.py zero-shot
+
+# Hoặc chạy uvicorn trực tiếp
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### Tùy Chọn B: Firebase
+```bash
+# Chạy máy chủ dựa trên Firebase
+python3 main.py firebase
+
+# Hoặc chạy uvicorn trực tiếp
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - Tiêu chuẩn mới trong phân loại hình ảnh 🚀
+
+---
+
+# 🔍 VisionAI Pro - Görüntü Sınıflandırma Sistemi {#turkish}
+
+ProRL V2 tabanlı görüntü sınıflandırma sistemi, **Firebase backend desteği** ile Pinterest tarzı web arayüzü ve REST API sağlar.
+
+## 🔥 Firebase Entegrasyonu
+
+Bu sistem artık backend veritabanı olarak **Firebase Firestore**'u destekliyor ve şunları sağlıyor:
+
+- **Bulut Depolama**: Tüm veriler Firebase Firestore'da güvenli bir şekilde saklanıyor
+- **Gerçek Zamanlı Senkronizasyon**: Cihazlar arası veri otomatik senkronizasyonu
+- **Ölçeklenebilirlik**: Yüksek trafikli uygulamalar için inşa edilmiş
+- **Kullanıcı Yönetimi**: Gelişmiş kullanıcı profilleri ve kullanım istatistikleri
+- **Analitik**: Detaylı kullanım takibi ve performans metrikleri
+- **Geçmiş**: Her kullanıcı için tam sınıflandırma geçmişi
+
+## ✨ Ana Özellikler
+
+- **AI Görüntü Sınıflandırması**: ProRL V2 modelini kullanarak görüntü kategorilerinin doğru sınıflandırması
+- **REST API**: API anahtarı tabanlı kimlik doğrulama ile güvenli API hizmeti
+- **Web Arayüzü**: Görüntü arama ve sınıflandırma için sezgisel Pinterest tarzı arayüz
+- **CLI Aracı**: Komut satırı görüntü sınıflandırması ve API anahtarı yönetimi
+- **Gerçek Zamanlı Analiz**: Yüklenen görüntülerin anında sınıflandırması ve sonuç görüntüleme
+
+## 🚀 Hızlı Başlangıç
+
+### 1. Ortam Kurulumu
+
+```bash
+# Depoyu klonla
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# Sanal ortam oluştur ve etkinleştir
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Bağımlılıkları yükle
+pip install -r config/requirements.txt
+```
+
+### 2. Ortam Değişkenleri
+
+```bash
+# .env dosyası oluştur (env_example.txt'ye bakın)
+cp config/env_example.txt .env
+
+# .env dosyasını gerçek değerlerle düzenle
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # veya cuda
+```
+
+### 3. Sunucuyu Başlat
+
+#### Seçenek A: SQLite (Varsayılan)
+```bash
+# SQLite ile ana sunucuyu çalıştır
+python3 main.py zero-shot
+
+# Veya uvicorn'u doğrudan çalıştır
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### Seçenek B: Firebase
+```bash
+# Firebase tabanlı sunucuyu çalıştır
+python3 main.py firebase
+
+# Veya uvicorn'u doğrudan çalıştır
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - Görüntü sınıflandırmasında yeni standart 🚀
+
+---
+
+# 🔍 VisionAI Pro - Sistema di Classificazione delle Immagini {#italian}
+
+Sistema di classificazione delle immagini basato su ProRL V2 che fornisce un'interfaccia web in stile Pinterest e API REST con **supporto backend Firebase**.
+
+## 🔥 Integrazione Firebase
+
+Questo sistema ora supporta **Firebase Firestore** come database backend, fornendo:
+
+- **Archiviazione Cloud**: Tutti i dati archiviati in modo sicuro in Firebase Firestore
+- **Sincronizzazione in Tempo Reale**: Sincronizzazione automatica dei dati tra dispositivi
+- **Scalabilità**: Costruito per applicazioni ad alto traffico
+- **Gestione Utenti**: Profili utente avanzati e statistiche di utilizzo
+- **Analytics**: Tracciamento dettagliato dell'utilizzo e metriche delle prestazioni
+- **Cronologia**: Cronologia completa di classificazione per ogni utente
+
+## ✨ Caratteristiche Principali
+
+- **Classificazione Immagini AI**: Classificazione accurata delle categorie di immagini utilizzando il modello ProRL V2
+- **REST API**: Servizio API sicuro con autenticazione basata su chiave API
+- **Interfaccia Web**: Interfaccia intuitiva in stile Pinterest per ricerca e classificazione delle immagini
+- **Strumento CLI**: Classificazione delle immagini da riga di comando e gestione delle chiavi API
+- **Analisi in Tempo Reale**: Classificazione istantanea e visualizzazione dei risultati delle immagini caricate
+
+## 🚀 Avvio Rapido
+
+### 1. Configurazione dell'Ambiente
+
+```bash
+# Clona il repository
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# Crea e attiva l'ambiente virtuale
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Installa le dipendenze
+pip install -r config/requirements.txt
+```
+
+### 2. Variabili d'Ambiente
+
+```bash
+# Crea il file .env (riferimento a env_example.txt)
+cp config/env_example.txt .env
+
+# Modifica il file .env con valori reali
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # o cuda
+```
+
+### 3. Avvia il Server
+
+#### Opzione A: SQLite (Predefinito)
+```bash
+# Esegui il server principale con SQLite
+python3 main.py zero-shot
+
+# Oppure esegui uvicorn direttamente
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### Opzione B: Firebase
+```bash
+# Esegui il server basato su Firebase
+python3 main.py firebase
+
+# Oppure esegui uvicorn direttamente
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - Nuovo standard nella classificazione delle immagini 🚀
+
+---
+
+# 🔍 VisionAI Pro - Sistema de Clasificación de Imágenes (México) {#latin-mexico}
+
+Sistema de clasificación de imágenes basado en ProRL V2 que proporciona una interfaz web estilo Pinterest y API REST con **soporte de backend Firebase**.
+
+## 🔥 Integración Firebase
+
+Este sistema ahora admite **Firebase Firestore** como base de datos backend, proporcionando:
+
+- **Almacenamiento en la Nube**: Todos los datos almacenados de forma segura en Firebase Firestore
+- **Sincronización en Tiempo Real**: Sincronización automática de datos entre dispositivos
+- **Escalabilidad**: Construido para aplicaciones de alto tráfico
+- **Gestión de Usuarios**: Perfiles de usuario avanzados y estadísticas de uso
+- **Analíticas**: Seguimiento detallado de uso y métricas de rendimiento
+- **Historial**: Historial completo de clasificación para cada usuario
+
+## ✨ Características Principales
+
+- **Clasificación de Imágenes IA**: Clasificación precisa de categorías de imágenes usando el modelo ProRL V2
+- **API REST**: Servicio API seguro con autenticación basada en clave API
+- **Interfaz Web**: Interfaz intuitiva estilo Pinterest para búsqueda y clasificación de imágenes
+- **Herramienta CLI**: Clasificación de imágenes desde línea de comandos y gestión de claves API
+- **Análisis en Tiempo Real**: Clasificación inmediata y visualización de resultados de imágenes subidas
+
+## 🚀 Inicio Rápido
+
+### 1. Configuración del Entorno
+
+```bash
+# Clonar repositorio
+git clone <repository-url>
+cd VisionAI2025Pro
+
+# Crear y activar entorno virtual
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Instalar dependencias
+pip install -r config/requirements.txt
+```
+
+### 2. Variables de Entorno
+
+```bash
+# Crear archivo .env (referirse a env_example.txt)
+cp config/env_example.txt .env
+
+# Editar archivo .env con valores reales
+API_SECRET_KEY=your-secret-key-here
+DEVICE=cpu  # o cuda
+```
+
+### 3. Iniciar Servidor
+
+#### Opción A: SQLite (Predeterminado)
+```bash
+# Ejecutar servidor principal con SQLite
+python3 main.py zero-shot
+
+# O ejecutar uvicorn directamente
+uvicorn src.api.zero_shot_main:app --reload --host 0.0.0.0 --port 8002
+```
+
+#### Opción B: Firebase
+```bash
+# Ejecutar servidor basado en Firebase
+python3 main.py firebase
+
+# O ejecutar uvicorn directamente
+uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
+```
+
+---
+
+**VisionAI Pro** - Nuevo estándar en clasificación de imágenes 🚀
