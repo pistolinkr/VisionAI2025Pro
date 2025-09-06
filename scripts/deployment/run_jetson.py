@@ -11,10 +11,10 @@ import subprocess
 from pathlib import Path
 
 # Add project root to Python path
-project_root = Path(__file__).parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from config import current_config
+from config.config import current_config
 
 def check_jetson_environment():
     """Check if running on Jetson and set appropriate environment"""

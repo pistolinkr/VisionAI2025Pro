@@ -14,7 +14,7 @@ import os
 
 # Add parent directory to path to import firebase_config
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-from firebase_config import firebase_config
+from config.firebase_config import firebase_config
 
 @dataclass
 class APIKey:

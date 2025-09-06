@@ -18,7 +18,6 @@ def main():
     
     # 환경 변수 설정
     os.environ.setdefault("BASE_WORDS_PATH", "query/base_words.txt")
-    os.environ.setdefault("BUILDING_TERMS_PATH", "query/building_terms_clean_final.csv")
     
     # 서버 설정
     host = "0.0.0.0"
@@ -27,7 +26,6 @@ def main():
     logger.info(f"서버 주소: http://{host}:{port}")
     logger.info(f"API 문서: http://{host}:{port}/docs")
     logger.info(f"Base Words 파일: {os.environ.get('BASE_WORDS_PATH')}")
-    logger.info(f"Building Terms 파일: {os.environ.get('BUILDING_TERMS_PATH')}")
     logger.info("=" * 50)
     
     # 서버 실행

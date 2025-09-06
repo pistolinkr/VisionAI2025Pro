@@ -6,9 +6,9 @@ import os
 from pathlib import Path
 
 # Base directory configuration
-BASE_DIR = Path(__file__).parent
-MODELS_DIR = BASE_DIR / "models"
-UPLOADS_DIR = BASE_DIR / "uploads"
+BASE_DIR = Path(__file__).parent.parent  # Go up one level from config/
+MODELS_DIR = BASE_DIR / "data" / "models"
+UPLOADS_DIR = BASE_DIR / "data" / "uploads"
 LOGS_DIR = BASE_DIR / "logs"
 STATIC_DIR = BASE_DIR / "static"
 TEMPLATES_DIR = BASE_DIR / "templates"
@@ -28,6 +28,11 @@ class Config:
     PORT = int(os.getenv("PORT", "8000"))
     DEBUG = os.getenv("DEBUG", "False").lower() == "true"
     
+    # Directory configuration
+    MODELS_DIR = MODELS_DIR
+    UPLOADS_DIR = UPLOADS_DIR
+    LOGS_DIR = LOGS_DIR
+    
     # Model configuration
     MODEL_PATH = os.getenv("MODEL_PATH", str(MODELS_DIR / "prorl_v2_model"))
     # 젯슨 환경에서는 GPU 사용 가능 여부 확인
@@ -39,7 +44,7 @@ class Config:
     ALLOWED_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'}
     
     # Database configuration
-    DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR}/image_categories.db")
+    DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR}/data/image_categories.db")
     
     # Logging configuration
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
