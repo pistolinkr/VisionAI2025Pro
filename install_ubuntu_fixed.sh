@@ -71,7 +71,14 @@ pip install --upgrade pip
 
 # 의존성 설치 (우분투 18.04 호환 버전)
 log_info "Python 의존성을 설치합니다..."
-if [ -f "config/requirements_ubuntu18.txt" ]; then
+
+# wheel 패키지 먼저 설치 (빌드 문제 해결)
+pip install wheel
+
+if [ -f "config/requirements_ubuntu18_minimal.txt" ]; then
+    log_info "우분투 18.04 최소 호환 버전을 사용합니다..."
+    pip install -r config/requirements_ubuntu18_minimal.txt
+elif [ -f "config/requirements_ubuntu18.txt" ]; then
     log_info "우분투 18.04 호환 버전을 사용합니다..."
     pip install -r config/requirements_ubuntu18.txt
 else
