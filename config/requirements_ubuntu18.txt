@@ -1,7 +1,7 @@
-# Ubuntu 18.04 호환 버전
+# Ubuntu 18.04 호환 버전 (수정됨)
 torch>=1.10.0,<2.0.0
 torchvision>=0.11.0,<0.15.0
-transformers>=4.20.0,<4.30.0
+transformers>=4.10.0,<4.19.0
 pillow>=8.0.0,<9.5.0
 fastapi>=0.80.0,<0.100.0
 uvicorn>=0.18.0,<0.23.0
