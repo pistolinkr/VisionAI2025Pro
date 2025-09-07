@@ -71,19 +71,20 @@ pip install --upgrade pip
 
 # 의존성 설치
 log_info "Python 의존성을 설치합니다..."
-pip install -r requirements.txt
+pip install -r config/requirements.txt
 
 # 환경 변수 설정
 log_info "환경 변수를 설정합니다..."
 if [ ! -f ".env" ]; then
-    cp env_example.txt .env
+    cp config/env_example.txt .env
     log_success "환경 변수 파일(.env)이 생성되었습니다."
 else
     log_warning "환경 변수 파일(.env)이 이미 존재합니다."
 fi
 
 # 실행 권한 부여
-chmod +x run*.py
+chmod +x run.py
+chmod +x scripts/deployment/run*.py
 chmod +x *.sh
 
 log_success "설치가 완료되었습니다!"
@@ -92,12 +93,12 @@ echo "🎉 VisionAI Pro가 성공적으로 설치되었습니다!"
 echo ""
 echo "📋 사용 가능한 서버:"
 echo "   • 기본 서버 (포트 8000): python3 run.py"
-echo "   • 고성능 서버 (포트 8001): python3 run_advanced.py"
-echo "   • Zero-shot 서버 (포트 8002): python3 run_zero_shot.py ⭐ 추천"
+echo "   • 고성능 서버 (포트 8001): python3 scripts/deployment/run_advanced.py"
+echo "   • Zero-shot 서버 (포트 8002): python3 scripts/deployment/run_zero_shot.py ⭐ 추천"
 echo ""
 echo "🚀 서버 실행 방법:"
 echo "   source venv/bin/activate"
-echo "   python3 run_zero_shot.py"
+echo "   python3 scripts/deployment/run_zero_shot.py"
 echo ""
 echo "🌐 웹 인터페이스:"
 echo "   http://서버IP:8002"
@@ -110,5 +111,5 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     log_info "Zero-shot 서버를 시작합니다..."
     log_warning "서버를 중지하려면 Ctrl+C를 누르세요"
     echo ""
-    python3 run_zero_shot.py
+    python3 scripts/deployment/run_zero_shot.py
 fi
