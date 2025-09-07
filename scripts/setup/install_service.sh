@@ -4,14 +4,14 @@
 
 set -e
 
-# 색상 정의
+# Color definitions
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# 로그 함수
+# Logging functions
 log_info() {
     echo -e "${BLUE}[INFO]${NC} $1"
 }
@@ -28,7 +28,7 @@ log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# 현재 사용자 확인
+# Check current user
 CURRENT_USER=$(whoami)
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -36,10 +36,10 @@ log_info "Installing VisionAI Pro Service..."
 log_info "Current user: $CURRENT_USER"
 log_info "Project directory: $PROJECT_DIR"
 
-# 서비스 파일 경로 설정
+# Set service file path
 SERVICE_FILE="/etc/systemd/system/visionai-pro.service"
 
-# 서비스 파일 생성
+# Create service file
 create_service_file() {
     log_info "Creating service file..."
     
@@ -75,53 +75,53 @@ EOF
     log_success "Service file created at $SERVICE_FILE"
 }
 
-# 서비스 설치
+# Install service
 install_service() {
     log_info "Installing systemd service..."
     
-    # systemd 리로드
+    # Reload systemd
     sudo systemctl daemon-reload
     
-    # 서비스 활성화
+    # Enable service
     sudo systemctl enable visionai-pro.service
     
     log_success "Service installed and enabled"
 }
 
-# 권한 설정
+# Set permissions
 set_permissions() {
     log_info "Setting file permissions..."
     
-    # 실행 권한 설정
+    # Set execute permissions
     chmod +x start_server.sh
     chmod +x run_jetson.py
     
-    # 로그 디렉토리 생성
+    # Create log directory
     mkdir -p logs
     chmod 755 logs
     
     log_success "Permissions set"
 }
 
-# 서비스 상태 확인
+# Check service status
 check_service() {
     log_info "Checking service status..."
     
     sudo systemctl status visionai-pro.service --no-pager -l
 }
 
-# 서비스 시작
+# Start service
 start_service() {
     log_info "Starting VisionAI Pro service..."
     
     sudo systemctl start visionai-pro.service
     
-    # 잠시 대기 후 상태 확인
+    # Wait briefly then check status
     sleep 3
     check_service
 }
 
-# 메인 실행
+# Main execution
 main() {
     echo "=========================================="
     echo "  VisionAI Pro Service Installation"
@@ -129,16 +129,16 @@ main() {
     echo "=========================================="
     echo
     
-    # 서비스 파일 생성
+    # Create service file
     create_service_file
     
-    # 서비스 설치
+    # Install service
     install_service
     
-    # 권한 설정
+    # Set permissions
     set_permissions
     
-    # 서비스 시작
+    # Start service
     start_service
     
     echo
@@ -154,5 +154,5 @@ main() {
     echo "The service will start automatically on boot."
 }
 
-# 스크립트 실행
+# Execute script
 main "$@"

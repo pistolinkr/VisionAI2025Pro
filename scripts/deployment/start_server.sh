@@ -5,14 +5,14 @@
 
 set -e
 
-# 색상 정의
+# Color definitions
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# 로그 함수
+# Logging functions
 log_info() {
     echo -e "${BLUE}[INFO]${NC} $1"
 }
@@ -29,22 +29,22 @@ log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# 스크립트 디렉토리 확인
+# Check script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 log_info "Starting VisionAI Pro Server on Jetson..."
 log_info "Script directory: $SCRIPT_DIR"
 
-# 시스템 확인
+# System check
 check_system() {
     log_info "Checking system environment..."
     
-    # 우분투 버전 확인
+    # Check Ubuntu version
     UBUNTU_VERSION=$(lsb_release -rs)
     log_info "Ubuntu version: $UBUNTU_VERSION"
     
-    # 젯슨 확인
+    # Check Jetson
     if [ -f "/proc/device-tree/model" ]; then
         JETSON_MODEL=$(cat /proc/device-tree/model)
         log_info "Jetson model: $JETSON_MODEL"
@@ -52,7 +52,7 @@ check_system() {
         log_warning "Not running on Jetson or model file not found"
     fi
     
-    # GPU 확인
+    # Check GPU
     if command -v nvidia-smi &> /dev/null; then
         log_success "NVIDIA GPU detected"
         nvidia-smi --query-gpu=name,memory.total --format=csv,noheader,nounits
@@ -60,7 +60,7 @@ check_system() {
         log_warning "NVIDIA GPU not detected"
     fi
     
-    # Python 확인
+    # Check Python
     if command -v python3 &> /dev/null; then
         PYTHON_VERSION=$(python3 --version)
         log_info "Python version: $PYTHON_VERSION"
@@ -70,7 +70,7 @@ check_system() {
     fi
 }
 
-# 가상환경 확인 및 활성화
+# Check and activate virtual environment
 setup_environment() {
     log_info "Setting up Python environment..."
     
@@ -79,10 +79,10 @@ setup_environment() {
         python3 -m venv venv
     fi
     
-    # 가상환경 활성화
+    # Activate virtual environment
     source venv/bin/activate
     
-    # 패키지 설치 확인
+    # Check package installation
     if ! python3 -c "import torch, fastapi, uvicorn" &> /dev/null; then
         log_warning "Required packages not found. Installing..."
         pip install -r requirements.txt
@@ -91,7 +91,7 @@ setup_environment() {
     log_success "Environment setup completed"
 }
 
-# 포트 확인
+# Port check
 check_port() {
     local PORT=${1:-8000}
     log_info "Checking port $PORT..."
@@ -106,7 +106,7 @@ check_port() {
     fi
 }
 
-# 환경 변수 설정
+# Environment variables setup
 setup_environment_variables() {
     log_info "Setting up environment variables..."
     
@@ -120,17 +120,17 @@ setup_environment_variables() {
     log_success "Environment variables set"
 }
 
-# 서버 시작
+# Start server
 start_server() {
     log_info "Starting VisionAI Pro server..."
     
-    # 포트 확인
+    # Check port
     if ! check_port 8000; then
         log_error "Cannot start server: port 8000 is in use"
         exit 1
     fi
     
-    # 서버 시작
+    # Start server
     if [ -f "run_jetson.py" ]; then
         log_info "Using Jetson optimized script..."
         python3 run_jetson.py
@@ -143,7 +143,7 @@ start_server() {
     fi
 }
 
-# 메인 실행
+# Main execution
 main() {
     echo "=========================================="
     echo "  VisionAI Pro Server Auto Start Script"
@@ -151,18 +151,18 @@ main() {
     echo "=========================================="
     echo
     
-    # 시스템 확인
+    # System check
     check_system
     
-    # 환경 설정
+    # Environment setup
     setup_environment
     
-    # 환경 변수 설정
+    # Environment variables setup
     setup_environment_variables
     
-    # 서버 시작
+    # Start server
     start_server
 }
 
-# 스크립트 실행
+# Execute script
 main "$@"

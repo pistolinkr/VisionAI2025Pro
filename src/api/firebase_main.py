@@ -21,9 +21,9 @@ import time
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from models.prorl_classifier import ProRLV2Classifier
-from auth.firebase_api_key_manager import FirebaseAPIKeyManager
-from models.firebase_data_manager import FirebaseDataManager
+from src.models.prorl_classifier import ProRLV2Classifier
+from src.auth.firebase_api_key_manager import FirebaseAPIKeyManager
+from src.models.firebase_data_manager import FirebaseDataManager
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)

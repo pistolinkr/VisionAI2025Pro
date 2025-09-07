@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from PIL import Image
 import io
 import time
@@ -15,7 +16,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 from src.models.zero_shot_classifier import ZeroShotCustomClassifier
 from src.auth.api_key_manager import APIKeyManager
-from config import *
+from config.config import *
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
@@ -36,6 +37,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 정적 파일 서빙 설정
+app.mount("/web_apps", StaticFiles(directory="web_apps"), name="web_apps")
 
 # 전역 변수
 classifier: Optional[ZeroShotCustomClassifier] = None
