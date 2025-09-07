@@ -35,12 +35,10 @@ log_error() {
 log_info "시스템 패키지를 업데이트합니다..."
 sudo apt update && sudo apt upgrade -y
 
-# Python 3.9 설치
-log_info "Python 3.9를 설치합니다..."
+# Python 3 설치 (우분투 18.04 기본 Python 3 사용)
+log_info "Python 3를 설치합니다..."
 sudo apt install software-properties-common -y
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt update
-sudo apt install python3.9 python3.9-venv python3.9-dev python3-pip -y
+sudo apt install python3 python3-venv python3-dev python3-pip -y
 
 # 필수 시스템 패키지 설치
 log_info "필수 시스템 패키지를 설치합니다..."
@@ -61,7 +59,7 @@ cd VisionAI2025Pro
 
 # 가상환경 생성
 log_info "Python 가상환경을 생성합니다..."
-python3.9 -m venv venv
+python3 -m venv venv
 
 # 가상환경 활성화
 log_info "가상환경을 활성화합니다..."
