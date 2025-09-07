@@ -1,0 +1,18 @@
+# Docker Compose를 사용한 간단한 실행
+version: '3.8'
+
+services:
+  visionai-pro:
+    build: .
+    ports:
+      - "8000:8000"  # 기본 서버
+      - "8001:8001"  # 고성능 서버
+      - "8002:8002"  # Zero-shot 서버
+    environment:
+      - DEVICE=cpu
+      - HOST=0.0.0.0
+      - PORT=8002
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    restart: unless-stopped
