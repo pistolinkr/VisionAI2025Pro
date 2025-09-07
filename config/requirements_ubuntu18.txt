@@ -1,10 +1,10 @@
-# Ubuntu 18.04 호환 버전 (수정됨)
+# Ubuntu 18.04 호환 버전 (최종 안전 버전)
 torch>=1.10.0,<2.0.0
 torchvision>=0.11.0,<0.15.0
 transformers>=4.10.0,<4.19.0
 pillow>=8.0.0,<9.5.0
-fastapi>=0.80.0,<0.100.0
-uvicorn>=0.18.0,<0.23.0
+fastapi>=0.70.0,<0.80.0
+uvicorn>=0.15.0,<0.18.0
 python-multipart>=0.0.5,<0.0.6
 python-jose[cryptography]>=3.2.0,<3.3.0
 passlib[bcrypt]>=1.7.2,<1.7.4
