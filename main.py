@@ -21,7 +21,15 @@ from config.config import current_config
 def run_zero_shot_server():
     """Run Zero-shot classification server"""
     import uvicorn
-    from src.api.zero_shot_main import app
+    import sys
+    import os
+    
+    # Add src directory to path for this function
+    src_path = os.path.join(os.path.dirname(__file__), 'src')
+    if src_path not in sys.path:
+        sys.path.insert(0, src_path)
+    
+    from api.zero_shot_main import app
     
     print("🚀 Starting Zero-shot Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8002")
@@ -37,7 +45,15 @@ def run_zero_shot_server():
 def run_advanced_server():
     """Run Advanced classification server"""
     import uvicorn
-    from src.api.advanced_main import app
+    import sys
+    import os
+    
+    # Add src directory to path for this function
+    src_path = os.path.join(os.path.dirname(__file__), 'src')
+    if src_path not in sys.path:
+        sys.path.insert(0, src_path)
+    
+    from api.advanced_main import app
     
     print("🚀 Starting Advanced Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8001")
@@ -53,7 +69,15 @@ def run_advanced_server():
 def run_firebase_server():
     """Run Firebase-based server"""
     import uvicorn
-    from src.api.firebase_main import app
+    import sys
+    import os
+    
+    # Add src directory to path for this function
+    src_path = os.path.join(os.path.dirname(__file__), 'src')
+    if src_path not in sys.path:
+        sys.path.insert(0, src_path)
+    
+    from api.firebase_main import app
     
     print("🚀 Starting Firebase Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8003")
@@ -68,7 +92,15 @@ def run_firebase_server():
 def run_main_server():
     """Run main classification server"""
     import uvicorn
-    from src.api.main import app
+    import sys
+    import os
+    
+    # Add src directory to path for this function
+    src_path = os.path.join(os.path.dirname(__file__), 'src')
+    if src_path not in sys.path:
+        sys.path.insert(0, src_path)
+    
+    from api.main import app
     
     print("🚀 Starting Main Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:{current_config.PORT}")
