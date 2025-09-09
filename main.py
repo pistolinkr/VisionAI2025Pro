@@ -12,6 +12,10 @@ from pathlib import Path
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
+# Add src directory to Python path for Windows compatibility
+src_path = project_root / "src"
+sys.path.insert(0, str(src_path))
+
 from config.config import current_config
 
 def run_zero_shot_server():

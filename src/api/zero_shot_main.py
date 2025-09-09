@@ -17,8 +17,8 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from src.models.zero_shot_classifier import ZeroShotCustomClassifier
-from src.auth.api_key_manager import APIKeyManager
+from models.zero_shot_classifier import ZeroShotCustomClassifier
+from auth.api_key_manager import APIKeyManager
 from config.config import *
 
 # 로깅 설정

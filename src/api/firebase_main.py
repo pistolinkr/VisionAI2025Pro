@@ -24,9 +24,9 @@ project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from src.models.prorl_classifier import ProRLV2Classifier
-from src.auth.firebase_api_key_manager import FirebaseAPIKeyManager
-from src.models.firebase_data_manager import FirebaseDataManager
+from models.prorl_classifier import ProRLV2Classifier
+from auth.firebase_api_key_manager import FirebaseAPIKeyManager
+from models.firebase_data_manager import FirebaseDataManager
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
