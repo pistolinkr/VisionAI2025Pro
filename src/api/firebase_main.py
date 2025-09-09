@@ -19,7 +19,10 @@ import time
 
 # 로컬 모듈 import
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add project root to Python path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from src.models.prorl_classifier import ProRLV2Classifier
 from src.auth.firebase_api_key_manager import FirebaseAPIKeyManager

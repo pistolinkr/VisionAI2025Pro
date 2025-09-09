@@ -12,7 +12,10 @@ import sys
 import traceback
 
 # 프로젝트 루트를 Python 경로에 추가
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+# Add project root to Python path
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from src.models.zero_shot_classifier import ZeroShotCustomClassifier
 from src.auth.api_key_manager import APIKeyManager
