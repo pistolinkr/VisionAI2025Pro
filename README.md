@@ -2,7 +2,7 @@
 
 ## 🌍 **Language Selection**
 
-**[🇺🇸 English](#visionai-pro-image-classification-system)** | **[🇰🇷 Korean](#korean)** | **[🇨🇳 Chinese](#chinese)** | **[🇪🇸 Spanish](#spanish)** | **[🇫🇷 French](#french)** | **[🇩🇪 German](#german)** | **[🇵🇹 Portuguese](#portuguese)** | **[🇸🇦 Arabic](#arabic)** | **[🇮🇳 Hindi](#hindi)** | **[🇯🇵 Japanese](#japanese)** | **[🇷🇺 Russian](#russian)** | **[🇮🇩 Indonesian](#indonesian)** | **[🇻🇳 Vietnamese](#vietnamese)** | **[🇹🇷 Turkish](#turkish)** | **[🇮🇹 Italian](#italian)** | **[🇲🇽 Latin (Mexico)](#latin-mexico)**
+**[🇺🇸 English](#visionai-pro-image-classification-system)** | **[🇰🇷 Korean](#VisionAI-Pro-이미지-분류-시스템)** | **[🇨🇳 Chinese](#chinese)** | **[🇪🇸 Spanish](#spanish)** | **[🇫🇷 French](#french)** | **[🇩🇪 German](#german)** | **[🇵🇹 Portuguese](#portuguese)** | **[🇸🇦 Arabic](#arabic)** | **[🇮🇳 Hindi](#hindi)** | **[🇯🇵 Japanese](#japanese)** | **[🇷🇺 Russian](#russian)** | **[🇮🇩 Indonesian](#indonesian)** | **[🇻🇳 Vietnamese](#vietnamese)** | **[🇹🇷 Turkish](#turkish)** | **[🇮🇹 Italian](#italian)** | **[🇲🇽 Latin (Mexico)](#latin-mexico)**
 
 🧠 **High-Performance Image Classification System** - Multi-classification engine utilizing Zero-shot Learning and pre-trained models
 
@@ -190,7 +190,7 @@ Bug reports, feature requests, and pull requests are welcome!
 **VisionAI Pro** - The new standard for image classification 🚀
 
 ---
-🇰🇷 Korean
+
 # VisionAI Pro 이미지 분류 시스템 
 
 🧠 **고성능 이미지 분류 시스템** - Zero-shot Learning과 사전 훈련된 모델을 활용한 다중 분류 엔진
