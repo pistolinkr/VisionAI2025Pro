@@ -42,8 +42,35 @@ print(f"DEBUG: models_path = {models_path}")
 print(f"DEBUG: auth_path = {auth_path}")
 print(f"DEBUG: sys.path = {sys.path[:5]}")
 
-from zero_shot_classifier import ZeroShotCustomClassifier
-from api_key_manager import APIKeyManager
+# Check if files exist
+zero_shot_file = os.path.join(models_path, 'zero_shot_classifier.py')
+api_key_file = os.path.join(auth_path, 'api_key_manager.py')
+print(f"DEBUG: zero_shot_file exists = {os.path.exists(zero_shot_file)}")
+print(f"DEBUG: api_key_file exists = {os.path.exists(api_key_file)}")
+
+try:
+    from zero_shot_classifier import ZeroShotCustomClassifier
+    print("DEBUG: Successfully imported ZeroShotCustomClassifier")
+except ImportError as e:
+    print(f"DEBUG: Failed to import ZeroShotCustomClassifier: {e}")
+    # Try alternative import
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("zero_shot_classifier", zero_shot_file)
+    zero_shot_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(zero_shot_module)
+    ZeroShotCustomClassifier = zero_shot_module.ZeroShotCustomClassifier
+
+try:
+    from api_key_manager import APIKeyManager
+    print("DEBUG: Successfully imported APIKeyManager")
+except ImportError as e:
+    print(f"DEBUG: Failed to import APIKeyManager: {e}")
+    # Try alternative import
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("api_key_manager", api_key_file)
+    api_key_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(api_key_module)
+    APIKeyManager = api_key_module.APIKeyManager
 from config.config import *
 
 # 로깅 설정
