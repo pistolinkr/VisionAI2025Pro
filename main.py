@@ -29,7 +29,12 @@ def run_zero_shot_server():
     if src_path not in sys.path:
         sys.path.insert(0, src_path)
     
-    from api.zero_shot_main import app
+    # Add src/api directory to path
+    api_path = os.path.join(os.path.dirname(__file__), 'src', 'api')
+    if api_path not in sys.path:
+        sys.path.insert(0, api_path)
+    
+    from zero_shot_main import app
     
     print("🚀 Starting Zero-shot Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8002")
@@ -53,7 +58,12 @@ def run_advanced_server():
     if src_path not in sys.path:
         sys.path.insert(0, src_path)
     
-    from api.advanced_main import app
+    # Add src/api directory to path
+    api_path = os.path.join(os.path.dirname(__file__), 'src', 'api')
+    if api_path not in sys.path:
+        sys.path.insert(0, api_path)
+    
+    from advanced_main import app
     
     print("🚀 Starting Advanced Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8001")
@@ -77,7 +87,12 @@ def run_firebase_server():
     if src_path not in sys.path:
         sys.path.insert(0, src_path)
     
-    from api.firebase_main import app
+    # Add src/api directory to path
+    api_path = os.path.join(os.path.dirname(__file__), 'src', 'api')
+    if api_path not in sys.path:
+        sys.path.insert(0, api_path)
+    
+    from firebase_main import app
     
     print("🚀 Starting Firebase Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8003")
@@ -100,7 +115,12 @@ def run_main_server():
     if src_path not in sys.path:
         sys.path.insert(0, src_path)
     
-    from api.main import app
+    # Add src/api directory to path
+    api_path = os.path.join(os.path.dirname(__file__), 'src', 'api')
+    if api_path not in sys.path:
+        sys.path.insert(0, api_path)
+    
+    from main import app
     
     print("🚀 Starting Main Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:{current_config.PORT}")
