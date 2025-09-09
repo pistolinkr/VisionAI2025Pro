@@ -96,14 +96,32 @@ app = FastAPI(
     version="3.0.0"
 )
 
-# CORS 설정
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Import security middleware
+from middleware.security import setup_security_middleware
+from config.config import Config
+
+# CORS 설정 - 보안 강화
+if Config.ENABLE_EXTERNAL_ACCESS:
+    # 외부 접근 허용 시 제한된 도메인만 허용
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=Config.ALLOWED_ORIGINS,
+        allow_credentials=True,
+        allow_methods=["GET", "POST", "PUT", "DELETE"],
+        allow_headers=["*"],
+    )
+else:
+    # 로컬 접근만 허용
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+        allow_credentials=True,
+        allow_methods=["GET", "POST"],
+        allow_headers=["*"],
+    )
+
+# 보안 미들웨어 설정
+app = setup_security_middleware(app)
 
 # 정적 파일 서빙 설정
 app.mount("/web_apps", StaticFiles(directory="web_apps"), name="web_apps")
@@ -211,12 +229,22 @@ async def get_categories(
 async def classify_image(
     file: UploadFile = File(...),
     top_k: int = Form(5),
-    api_key: str = Form(...)
+    api_key: str = Form(...),
+    request: Request = None
 ):
     """Zero-shot 이미지 분류"""
+    client_ip = request.client.host if request else "unknown"
+    
     # API 키 검증
     if not verify_api_key(api_key):
+        # 보안 로깅
+        api_key_manager.log_api_usage(api_key, client_ip, "/classify", 401)
         raise HTTPException(status_code=401, detail="Invalid API key")
+    
+    # IP 화이트리스트 검증
+    if not api_key_manager.validate_ip_access(api_key, client_ip):
+        api_key_manager.log_api_usage(api_key, client_ip, "/classify", 403)
+        raise HTTPException(status_code=403, detail="IP address not allowed")
     
     # 파일 검증
     if not file.content_type.startswith("image/"):
@@ -235,6 +263,9 @@ async def classify_image(
         predictions = classifier.predict(image, top_k=top_k)
         
         processing_time = time.time() - start_time
+        
+        # 성공 로깅
+        api_key_manager.log_api_usage(api_key, client_ip, "/classify", 200)
         
         # 결과 반환
         return {
@@ -478,6 +509,95 @@ async def validate_api_key(api_key: str):
     except Exception as e:
         logger.error(f"API 키 검증 실패: {e}")
         return {"valid": False, "message": str(e)}
+
+@app.post("/api/keys/generate-secure")
+async def generate_secure_api_key(
+    client_name: str = Form(...),
+    permissions: str = Form("classify"),
+    expires_days: int = Form(365),
+    ip_whitelist: str = Form("")
+):
+    """보안 API 키 생성 (IP 제한 포함)"""
+    try:
+        permissions_list = [p.strip() for p in permissions.split(",")]
+        ip_list = [ip.strip() for ip in ip_whitelist.split(",")] if ip_whitelist else None
+        
+        api_key = api_key_manager.generate_secure_key(
+            user_id=f"user_{int(time.time())}",
+            name=client_name,
+            permissions=permissions_list,
+            expires_days=expires_days,
+            ip_whitelist=ip_list
+        )
+        
+        if api_key:
+            return {
+                "success": True,
+                "api_key": api_key,
+                "client_name": client_name,
+                "permissions": permissions_list,
+                "expires_days": expires_days,
+                "ip_whitelist": ip_list,
+                "message": "보안 API 키가 성공적으로 생성되었습니다.",
+                "usage_info": {
+                    "rate_limit": f"{Config.RATE_LIMIT_PER_MINUTE} requests/minute",
+                    "max_image_size": f"{Config.MAX_REQUEST_SIZE} bytes",
+                    "supported_formats": ["JPEG", "PNG", "GIF", "BMP", "TIFF"],
+                    "base_url": f"http://{Config.HOST}:{Config.PORT}"
+                }
+            }
+        else:
+            raise HTTPException(status_code=500, detail="API 키 생성 실패")
+            
+    except Exception as e:
+        logger.error(f"보안 API 키 생성 실패: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/keys/stats")
+async def get_api_key_stats(api_key: str, days: int = 30):
+    """API 키 사용량 통계 조회"""
+    try:
+        # API 키 검증
+        if not verify_api_key(api_key):
+            raise HTTPException(status_code=401, detail="Invalid API key")
+        
+        stats = api_key_manager.get_usage_stats(api_key, days)
+        
+        return {
+            "success": True,
+            "api_key": api_key[:8] + "..." + api_key[-8:],  # 부분적으로만 표시
+            "period_days": days,
+            "stats": stats
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"API 키 통계 조회 실패: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/keys/revoke")
+async def revoke_api_key(api_key: str = Form(...), user_id: str = Form(...)):
+    """API 키 취소 (보안상의 이유로)"""
+    try:
+        # API 키 검증
+        if not verify_api_key(api_key):
+            raise HTTPException(status_code=401, detail="Invalid API key")
+        
+        revoked_count = api_key_manager.revoke_compromised_keys(user_id)
+        
+        return {
+            "success": True,
+            "message": f"{revoked_count}개의 API 키가 취소되었습니다.",
+            "revoked_count": revoked_count,
+            "user_id": user_id
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"API 키 취소 실패: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn

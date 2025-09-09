@@ -1,5 +1,5 @@
-# VisionAI Pro Image Classification System - Requirements
-# Windows Compatible Version
+# VisionAI Pro Image Classification System - Windows Fixed Requirements
+# Python 3.13 호환성 개선 버전
 
 # Core ML Libraries
 torch>=2.6.0
@@ -7,16 +7,16 @@ torchvision>=0.19.0
 transformers>=4.30.0
 pillow>=9.5.0
 
-# Web Framework
+# Web Framework (호환성 개선)
 fastapi>=0.100.0
 uvicorn[standard]>=0.23.0
 python-multipart>=0.0.6
+pydantic>=2.0.0,<3.0.0
+pydantic-core>=2.0.0,<3.0.0
 
 # Authentication & Security
 python-jose[cryptography]>=3.3.0
 passlib[bcrypt]>=1.7.4
-slowapi>=0.1.9
-redis>=4.6.0
 
 # Configuration & Environment
 python-dotenv>=1.0.0
@@ -42,5 +42,5 @@ pywin32>=306; sys_platform == "win32"
 wincertstore>=0.2; sys_platform == "win32"
 
 # Development Dependencies (Optional)
-pytest>=7.4.0,<8.0.0
-pytest-asyncio>=0.21.0,<1.0.0
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
