@@ -191,7 +191,7 @@ Bug reports, feature requests, and pull requests are welcome!
 
 ---
 
-# VisionAI Pro 이미지 분류 시스템 {#korean}
+# VisionAI Pro 이미지 분류 시스템 
 
 🧠 **고성능 이미지 분류 시스템** - Zero-shot Learning과 사전 훈련된 모델을 활용한 다중 분류 엔진
 
