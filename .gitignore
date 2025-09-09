@@ -30,8 +30,8 @@ venv/
 env/
 ENV/
 
-# 모델 파일
-models/
+# 모델 파일 (데이터 모델만 제외, 소스 코드는 포함)
+data/models/
 *.pth
 *.pt
 *.ckpt
