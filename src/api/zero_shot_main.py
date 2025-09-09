@@ -25,16 +25,24 @@ if src_path not in sys.path:
 # Direct import with absolute path
 import sys
 import os
-models_path = os.path.join(os.path.dirname(__file__), '..', 'models')
+
+# Get absolute paths
+current_dir = os.path.dirname(__file__)
+models_path = os.path.abspath(os.path.join(current_dir, '..', 'models'))
+auth_path = os.path.abspath(os.path.join(current_dir, '..', 'auth'))
+
+# Add to Python path
 if models_path not in sys.path:
     sys.path.insert(0, models_path)
-
-from zero_shot_classifier import ZeroShotCustomClassifier
-
-auth_path = os.path.join(os.path.dirname(__file__), '..', 'auth')
 if auth_path not in sys.path:
     sys.path.insert(0, auth_path)
 
+# Debug: print paths
+print(f"DEBUG: models_path = {models_path}")
+print(f"DEBUG: auth_path = {auth_path}")
+print(f"DEBUG: sys.path = {sys.path[:5]}")
+
+from zero_shot_classifier import ZeroShotCustomClassifier
 from api_key_manager import APIKeyManager
 from config.config import *
 
