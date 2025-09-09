@@ -17,6 +17,11 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
+# Add src directory to Python path
+src_path = os.path.dirname(os.path.dirname(__file__))
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
+
 from models.zero_shot_classifier import ZeroShotCustomClassifier
 from auth.api_key_manager import APIKeyManager
 from config.config import *

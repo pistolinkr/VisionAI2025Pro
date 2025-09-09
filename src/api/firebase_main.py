@@ -24,6 +24,11 @@ project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
+# Add src directory to Python path
+src_path = os.path.dirname(os.path.dirname(__file__))
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
+
 from models.prorl_classifier import ProRLV2Classifier
 from auth.firebase_api_key_manager import FirebaseAPIKeyManager
 from models.firebase_data_manager import FirebaseDataManager
