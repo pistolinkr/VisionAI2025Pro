@@ -45,8 +45,20 @@ print(f"DEBUG: sys.path = {sys.path[:5]}")
 # Check if files exist
 zero_shot_file = os.path.join(models_path, 'zero_shot_classifier.py')
 api_key_file = os.path.join(auth_path, 'api_key_manager.py')
+print(f"DEBUG: zero_shot_file = {zero_shot_file}")
+print(f"DEBUG: api_key_file = {api_key_file}")
 print(f"DEBUG: zero_shot_file exists = {os.path.exists(zero_shot_file)}")
 print(f"DEBUG: api_key_file exists = {os.path.exists(api_key_file)}")
+
+# List files in models directory
+models_files = os.listdir(models_path) if os.path.exists(models_path) else []
+print(f"DEBUG: models directory files = {models_files}")
+
+# Try alternative path construction
+alt_zero_shot_file = os.path.join(os.path.dirname(__file__), '..', 'models', 'zero_shot_classifier.py')
+alt_zero_shot_file = os.path.abspath(alt_zero_shot_file)
+print(f"DEBUG: alt_zero_shot_file = {alt_zero_shot_file}")
+print(f"DEBUG: alt_zero_shot_file exists = {os.path.exists(alt_zero_shot_file)}")
 
 try:
     from zero_shot_classifier import ZeroShotCustomClassifier
