@@ -21,27 +21,17 @@ from config.config import current_config
 def run_zero_shot_server():
     """Run Zero-shot classification server"""
     import uvicorn
+    import subprocess
     import sys
     import os
-    
-    # Add src directory to path for this function
-    src_path = os.path.join(os.path.dirname(__file__), 'src')
-    if src_path not in sys.path:
-        sys.path.insert(0, src_path)
-    
-    # Add src/api directory to path
-    api_path = os.path.join(os.path.dirname(__file__), 'src', 'api')
-    if api_path not in sys.path:
-        sys.path.insert(0, api_path)
-    
-    from zero_shot_main import app
     
     print("🚀 Starting Zero-shot Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8002")
     print(f"📱 Web interface: http://{current_config.HOST}:8002/web_apps/zero_shot/zero_shot_web_app.html")
     
+    # Run uvicorn directly with the module path
     uvicorn.run(
-        app,
+        "src.api.zero_shot_main:app",
         host=current_config.HOST,
         port=8002,
         log_level=current_config.LOG_LEVEL.lower()
@@ -50,27 +40,14 @@ def run_zero_shot_server():
 def run_advanced_server():
     """Run Advanced classification server"""
     import uvicorn
-    import sys
-    import os
-    
-    # Add src directory to path for this function
-    src_path = os.path.join(os.path.dirname(__file__), 'src')
-    if src_path not in sys.path:
-        sys.path.insert(0, src_path)
-    
-    # Add src/api directory to path
-    api_path = os.path.join(os.path.dirname(__file__), 'src', 'api')
-    if api_path not in sys.path:
-        sys.path.insert(0, api_path)
-    
-    from advanced_main import app
     
     print("🚀 Starting Advanced Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8001")
     print(f"📱 Web interface: http://{current_config.HOST}:8001/web_apps/advanced/advanced_web_app.html")
     
+    # Run uvicorn directly with the module path
     uvicorn.run(
-        app,
+        "src.api.advanced_main:app",
         host=current_config.HOST,
         port=8001,
         log_level=current_config.LOG_LEVEL.lower()
@@ -79,26 +56,13 @@ def run_advanced_server():
 def run_firebase_server():
     """Run Firebase-based server"""
     import uvicorn
-    import sys
-    import os
-    
-    # Add src directory to path for this function
-    src_path = os.path.join(os.path.dirname(__file__), 'src')
-    if src_path not in sys.path:
-        sys.path.insert(0, src_path)
-    
-    # Add src/api directory to path
-    api_path = os.path.join(os.path.dirname(__file__), 'src', 'api')
-    if api_path not in sys.path:
-        sys.path.insert(0, api_path)
-    
-    from firebase_main import app
     
     print("🚀 Starting Firebase Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:8003")
     
+    # Run uvicorn directly with the module path
     uvicorn.run(
-        app,
+        "src.api.firebase_main:app",
         host=current_config.HOST,
         port=8003,
         log_level=current_config.LOG_LEVEL.lower()
@@ -107,27 +71,14 @@ def run_firebase_server():
 def run_main_server():
     """Run main classification server"""
     import uvicorn
-    import sys
-    import os
-    
-    # Add src directory to path for this function
-    src_path = os.path.join(os.path.dirname(__file__), 'src')
-    if src_path not in sys.path:
-        sys.path.insert(0, src_path)
-    
-    # Add src/api directory to path
-    api_path = os.path.join(os.path.dirname(__file__), 'src', 'api')
-    if api_path not in sys.path:
-        sys.path.insert(0, api_path)
-    
-    from main import app
     
     print("🚀 Starting Main Classification Server...")
     print(f"📡 Server will run on http://{current_config.HOST}:{current_config.PORT}")
     print(f"📱 Web interface: http://{current_config.HOST}:{current_config.PORT}")
     
+    # Run uvicorn directly with the module path
     uvicorn.run(
-        app,
+        "src.api.main:app",
         host=current_config.HOST,
         port=current_config.PORT,
         log_level=current_config.LOG_LEVEL.lower()
