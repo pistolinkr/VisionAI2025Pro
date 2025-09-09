@@ -22,8 +22,20 @@ src_path = os.path.dirname(os.path.dirname(__file__))
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
-from models.zero_shot_classifier import ZeroShotCustomClassifier
-from auth.api_key_manager import APIKeyManager
+# Direct import with absolute path
+import sys
+import os
+models_path = os.path.join(os.path.dirname(__file__), '..', 'models')
+if models_path not in sys.path:
+    sys.path.insert(0, models_path)
+
+from zero_shot_classifier import ZeroShotCustomClassifier
+
+auth_path = os.path.join(os.path.dirname(__file__), '..', 'auth')
+if auth_path not in sys.path:
+    sys.path.insert(0, auth_path)
+
+from api_key_manager import APIKeyManager
 from config.config import *
 
 # 로깅 설정

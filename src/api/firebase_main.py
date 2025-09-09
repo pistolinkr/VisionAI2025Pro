@@ -29,9 +29,21 @@ src_path = os.path.dirname(os.path.dirname(__file__))
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
-from models.prorl_classifier import ProRLV2Classifier
-from auth.firebase_api_key_manager import FirebaseAPIKeyManager
-from models.firebase_data_manager import FirebaseDataManager
+# Direct import with absolute path
+import sys
+import os
+models_path = os.path.join(os.path.dirname(__file__), '..', 'models')
+if models_path not in sys.path:
+    sys.path.insert(0, models_path)
+
+from prorl_classifier import ProRLV2Classifier
+from firebase_data_manager import FirebaseDataManager
+
+auth_path = os.path.join(os.path.dirname(__file__), '..', 'auth')
+if auth_path not in sys.path:
+    sys.path.insert(0, auth_path)
+
+from firebase_api_key_manager import FirebaseAPIKeyManager
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
