@@ -2,7 +2,7 @@
 
 ## 🌍 **Language Selection**
 
-**[🇺🇸 English](#-quick-start)** | **[🇰🇷 Korean](#-korean)** | **[🇨🇳 Chinese](#-chinese)** | **[🇪🇸 Spanish](#-spanish)** | **[🇫🇷 French](#-french)** | **[🇩🇪 German](#-german)** | **[🇵🇹 Portuguese](#-portuguese)** | **[🇸🇦 Arabic](#-arabic)** | **[🇮🇳 Hindi](#-hindi)** | **[🇯🇵 Japanese](#-japanese)** | **[🇷🇺 Russian](#-russian)** | **[🇮🇩 Indonesian](#-indonesian)** | **[🇻🇳 Vietnamese](#-vietnamese)** | **[🇹🇷 Turkish](#-turkish)** | **[🇮🇹 Italian](#-italian)** | **[🇲🇽 Latin (Mexico)](#-latin-mexico)**
+**[🇺🇸 English](#-visionai-pro---server-deployment-guide)** | **[🇰🇷 Korean](#korean)** | **[🇨🇳 Chinese](#chinese)** | **[🇪🇸 Spanish](#spanish)** | **[🇫🇷 French](#french)** | **[🇩🇪 German](#german)** | **[🇵🇹 Portuguese](#portuguese)** | **[🇸🇦 Arabic](#arabic)** | **[🇮🇳 Hindi](#hindi)** | **[🇯🇵 Japanese](#japanese)** | **[🇷🇺 Russian](#russian)** | **[🇮🇩 Indonesian](#indonesian)** | **[🇻🇳 Vietnamese](#vietnamese)** | **[🇹🇷 Turkish](#turkish)** | **[🇮🇹 Italian](#italian)** | **[🇲🇽 Latin (Mexico)](#latin-mexico)**
 
 ## 🚀 Quick Start
 

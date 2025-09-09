@@ -2,7 +2,7 @@
 
 ## 🌍 **Language Selection**
 
-**[🇺🇸 English](#-key-features)** | **[🇰🇷 Korean](#-korean)** | **[🇨🇳 Chinese](#-chinese)** | **[🇪🇸 Spanish](#-spanish)** | **[🇫🇷 French](#-french)** | **[🇩🇪 German](#-german)** | **[🇵🇹 Portuguese](#-portuguese)** | **[🇸🇦 Arabic](#-arabic)** | **[🇮🇳 Hindi](#-hindi)** | **[🇯🇵 Japanese](#-japanese)** | **[🇷🇺 Russian](#-russian)** | **[🇮🇩 Indonesian](#-indonesian)** | **[🇻🇳 Vietnamese](#-vietnamese)** | **[🇹🇷 Turkish](#-turkish)** | **[🇮🇹 Italian](#-italian)** | **[🇲🇽 Latin (Mexico)](#-latin-mexico)**
+**[🇺🇸 English](#visionai-pro-image-classification-system)** | **[🇰🇷 Korean](#korean)** | **[🇨🇳 Chinese](#chinese)** | **[🇪🇸 Spanish](#spanish)** | **[🇫🇷 French](#french)** | **[🇩🇪 German](#german)** | **[🇵🇹 Portuguese](#portuguese)** | **[🇸🇦 Arabic](#arabic)** | **[🇮🇳 Hindi](#hindi)** | **[🇯🇵 Japanese](#japanese)** | **[🇷🇺 Russian](#russian)** | **[🇮🇩 Indonesian](#indonesian)** | **[🇻🇳 Vietnamese](#vietnamese)** | **[🇹🇷 Turkish](#turkish)** | **[🇮🇹 Italian](#italian)** | **[🇲🇽 Latin (Mexico)](#latin-mexico)**
 
 🧠 **High-Performance Image Classification System** - Multi-classification engine utilizing Zero-shot Learning and pre-trained models
 
