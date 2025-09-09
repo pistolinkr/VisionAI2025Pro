@@ -15,7 +15,7 @@ TEMPLATES_DIR = BASE_DIR / "templates"
 
 # Create directories
 for dir_path in [MODELS_DIR, UPLOADS_DIR, LOGS_DIR, STATIC_DIR, TEMPLATES_DIR]:
-    dir_path.mkdir(exist_ok=True)
+    dir_path.mkdir(parents=True, exist_ok=True)
 
 # Load configuration from environment variables (with defaults)
 class Config:
