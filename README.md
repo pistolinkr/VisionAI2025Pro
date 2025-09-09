@@ -380,7 +380,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# VisionAI Pro 图像分类系统 {#chinese}
+# VisionAI Pro 图像分类系统
 
 🧠 **高性能图像分类系统** - 利用零样本学习和预训练模型的多分类引擎
 
@@ -569,7 +569,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🔍 VisionAI Pro - Sistema de Clasificación de Imágenes {#spanish}
+# 🔍 VisionAI Pro - Sistema de Clasificación de Imágenes
 
 Un sistema de clasificación de imágenes basado en ProRL V2 que proporciona una interfaz web estilo Pinterest y API REST con **soporte de backend Firebase**.
 
@@ -646,7 +646,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Système de Classification d'Images {#french}
+# 🔍 VisionAI Pro - Système de Classification d'Images
 
 Un système de classification d'images basé sur ProRL V2 qui fournit une interface web style Pinterest et une API REST avec **support de backend Firebase**.
 
@@ -723,7 +723,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Bildklassifizierungssystem {#german}
+# 🔍 VisionAI Pro - Bildklassifizierungssystem
 
 Ein ProRL V2-basiertes Bildklassifizierungssystem, das eine Pinterest-ähnliche Web-Oberfläche und REST-API mit **Firebase Backend-Unterstützung** bietet.
 
@@ -800,7 +800,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Sistema de Classificação de Imagens {#portuguese}
+# 🔍 VisionAI Pro - Sistema de Classificação de Imagens
 
 Um sistema de classificação de imagens baseado em ProRL V2 que fornece uma interface web estilo Pinterest e API REST com **suporte de backend Firebase**.
 
@@ -877,7 +877,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - نظام تصنيف الصور {#arabic}
+# 🔍 VisionAI Pro - نظام تصنيف الصور
 
 نظام تصنيف الصور القائم على ProRL V2 الذي يوفر واجهة ويب على طراز Pinterest وواجهة برمجة تطبيقات REST مع **دعم خادم Firebase**.
 
@@ -954,7 +954,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - छवि वर्गीकरण प्रणाली {#hindi}
+# 🔍 VisionAI Pro - छवि वर्गीकरण प्रणाली
 
 ProRL V2 आधारित छवि वर्गीकरण प्रणाली जो **Firebase बैकएंड समर्थन** के साथ Pinterest-शैली वेब इंटरफेस और REST API प्रदान करती है।
 
@@ -1031,7 +1031,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - 画像分類システム {#japanese}
+# 🔍 VisionAI Pro - 画像分類システム
 
 ProRL V2ベースの画像分類システムで、**Firebaseバックエンドサポート**付きのPinterestスタイルのWebインターフェースとREST APIを提供します。
 
@@ -1108,7 +1108,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Система классификации изображений {#russian}
+# 🔍 VisionAI Pro - Система классификации изображений
 
 Система классификации изображений на основе ProRL V2, которая предоставляет веб-интерфейс в стиле Pinterest и REST API с **поддержкой Firebase бэкенда**.
 
@@ -1185,7 +1185,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Sistem Klasifikasi Gambar {#indonesian}
+# 🔍 VisionAI Pro - Sistem Klasifikasi Gambar
 
 Sistem klasifikasi gambar berbasis ProRL V2 yang menyediakan antarmuka web bergaya Pinterest dan REST API dengan **dukungan backend Firebase**.
 
@@ -1262,7 +1262,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Hệ Thống Phân Loại Hình Ảnh {#vietnamese}
+# 🔍 VisionAI Pro - Hệ Thống Phân Loại Hình Ảnh
 
 Hệ thống phân loại hình ảnh dựa trên ProRL V2 cung cấp giao diện web kiểu Pinterest và REST API với **hỗ trợ backend Firebase**.
 
@@ -1339,7 +1339,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Görüntü Sınıflandırma Sistemi {#turkish}
+# 🔍 VisionAI Pro - Görüntü Sınıflandırma Sistemi
 
 ProRL V2 tabanlı görüntü sınıflandırma sistemi, **Firebase backend desteği** ile Pinterest tarzı web arayüzü ve REST API sağlar.
 
@@ -1416,7 +1416,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Sistema di Classificazione delle Immagini {#italian}
+# 🔍 VisionAI Pro - Sistema di Classificazione delle Immagini
 
 Sistema di classificazione delle immagini basato su ProRL V2 che fornisce un'interfaccia web in stile Pinterest e API REST con **supporto backend Firebase**.
 
@@ -1493,7 +1493,7 @@ uvicorn src.api.firebase_main:app --reload --host 0.0.0.0 --port 8003
 
 ---
 
-# 🔍 VisionAI Pro - Sistema de Clasificación de Imágenes (México) {#latin-mexico}
+# 🔍 VisionAI Pro - Sistema de Clasificación de Imágenes (México)
 
 Sistema de clasificación de imágenes basado en ProRL V2 que proporciona una interfaz web estilo Pinterest y API REST con **soporte de backend Firebase**.
 

@@ -195,7 +195,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - 서버 배포 가이드 {#korean}
+# 🚀 VisionAI Pro - 서버 배포 가이드
 
 ## 🚀 빠른 시작
 
@@ -388,7 +388,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - 服务器部署指南 {#chinese}
+# 🚀 VisionAI Pro - 服务器部署指南
 
 ## 🚀 快速开始
 
@@ -581,7 +581,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Guía de Despliegue del Servidor {#spanish}
+# 🚀 VisionAI Pro - Guía de Despliegue del Servidor
 
 ## 🚀 Inicio Rápido
 
@@ -774,7 +774,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Guide de Déploiement du Serveur {#french}
+# 🚀 VisionAI Pro - Guide de Déploiement du Serveur
 
 ## 🚀 Démarrage Rapide
 
@@ -967,7 +967,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Server-Bereitstellungsanleitung {#german}
+# 🚀 VisionAI Pro - Server-Bereitstellungsanleitung
 
 ## 🚀 Schnellstart
 
@@ -1160,7 +1160,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Guia de Implantação do Servidor {#portuguese}
+# 🚀 VisionAI Pro - Guia de Implantação do Servidor
 
 ## 🚀 Início Rápido
 
@@ -1353,7 +1353,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - دليل نشر الخادم {#arabic}
+# 🚀 VisionAI Pro - دليل نشر الخادم
 
 ## 🚀 البدء السريع
 
@@ -1546,7 +1546,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - सर्वर तैनाती गाइड {#hindi}
+# 🚀 VisionAI Pro - सर्वर तैनाती गाइड
 
 ## 🚀 त्वरित प्रारंभ
 
@@ -1739,7 +1739,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - サーバーデプロイガイド {#japanese}
+# 🚀 VisionAI Pro - サーバーデプロイガイド
 
 ## 🚀 クイックスタート
 
@@ -1932,7 +1932,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Руководство по развертыванию сервера {#russian}
+# 🚀 VisionAI Pro - Руководство по развертыванию сервера
 
 ## 🚀 Быстрый старт
 
@@ -2125,7 +2125,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Panduan Penyebaran Server {#indonesian}
+# 🚀 VisionAI Pro - Panduan Penyebaran Server
 
 ## 🚀 Mulai Cepat
 
@@ -2318,7 +2318,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Hướng Dẫn Triển Khai Máy Chủ {#vietnamese}
+# 🚀 VisionAI Pro - Hướng Dẫn Triển Khai Máy Chủ
 
 ## 🚀 Bắt Đầu Nhanh
 
@@ -2511,7 +2511,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Sunucu Dağıtım Kılavuzu {#turkish}
+# 🚀 VisionAI Pro - Sunucu Dağıtım Kılavuzu
 
 ## 🚀 Hızlı Başlangıç
 
@@ -2704,7 +2704,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Guida alla Distribuzione del Server {#italian}
+# 🚀 VisionAI Pro - Guida alla Distribuzione del Server
 
 ## 🚀 Avvio Rapido
 
@@ -2897,7 +2897,7 @@ journalctl -u visionai-pro -f
 
 ---
 
-# 🚀 VisionAI Pro - Guía de Despliegue del Servidor {#latin-mexico}
+# 🚀 VisionAI Pro - Guía de Despliegue del Servidor
 
 ## 🚀 Inicio Rápido
 
